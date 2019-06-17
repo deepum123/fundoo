@@ -1,0 +1,22 @@
+{
+    "register":{
+        "firstname":"deepum",
+        "lastname":"kumar",
+        "email":"deepums436644@gmail.com",
+        "password":"1234567899"
+
+    },
+    "login":{
+        "email":"deepum23@gmail.com",
+        "password":"1234567899"
+        
+    },
+    "forgotpassword":{
+        "email":"deepum23@gmail.com"
+    },
+    "resetpassword":
+  
+    {
+        "password":"123qweasdzxc"
+    }
+}
