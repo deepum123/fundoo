@@ -3,7 +3,7 @@
  * @purpose   : A JSON Web Token(JWT), defines an explicit, compact, and self-containing secured protocol for transmitting restricted informations
  * 
  * @file      : tokenGen.js
- * @overview  :generate the user token 
+ * @overview  :generate the user token
  * @author    : Deepu M
  * @version   : npm 3.5.2
  * @since     : 15.06.2019
