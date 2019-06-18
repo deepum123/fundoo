@@ -1,7 +1,23 @@
+
+/************************************************************************************
+ * @purpose   : The Nodemailer module makes it easy to send emails from your computer
+ * 
+ * @file      : sendMailer.js
+ * @overview  : Use the username and password from your selected email provider to send an email
+ * @author    : Deepu M
+ * @version   : npm 3.5.2
+ * @since     : 15.06.2019
+ * 
+ *************************************************************************************/
+
+
+
 const nodemailer=require('nodemailer')
+.
 
 module.exports.sendMailer=(url)=>{
     try{
+ //Use the username and password from your selected email provider to send an email. 
     const transpoter=nodemailer.createTransport({
         service:'gmail',
         auth:{

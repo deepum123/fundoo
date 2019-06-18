@@ -39,6 +39,7 @@ module.exports.userControllerRegister = (req, res) => {
             services.userServiceRegister(req.body, (err, data) => {
                 if (err) {
                     console.log(err + "error in userController callback block")
+                    return res.status(500).send(err)
                 } else {
                     const payload = { email: req.body.email }
 

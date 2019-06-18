@@ -47,7 +47,7 @@ mongoose.connect(url.url, { useNewUrlParser: true })
         console.log("successfully connected to data base")
 
     }).catch((err) => {
-        console.log("could not connected to the data base")
+        console.log("could not connected to the data base",err)
         process.exit()
     })
 

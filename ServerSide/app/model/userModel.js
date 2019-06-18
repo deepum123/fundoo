@@ -47,7 +47,7 @@ const userSchema = new Schema({
         trim: true,
         lowercase: true,
         unique: true,
-        required: 'Email address is required',
+        required: true ,
         validator: validator.isEmail,
     },
     password: {
