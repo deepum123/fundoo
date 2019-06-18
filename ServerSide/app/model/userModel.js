@@ -12,8 +12,6 @@
 
 
 
-
-
 /******* require mongoose *******
 *It manages relationships between data, provides schema validation, and is used to 
 translate between objects in code and the representation of those objects in MongoDB.*/
@@ -119,7 +117,7 @@ userModel.prototype.userModelRegister = (body, callback) => {
 
 
 
-/* 
+/**
 *@description : To user Login
 *@param       : body (request from client)
 *@param       : callback (response from server)
@@ -248,3 +246,5 @@ userModel.prototype.userModelEmailVerification = (req, callback) => {
 }
 
 module.exports = new userModel
+
+
