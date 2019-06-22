@@ -8,10 +8,12 @@
  * @since     : 15.06.2019
  * 
  *************************************************************************************/
-
+const model = require('../app/model/userModel')
 const services = require('../services/userServices')
 const tokenGenn = require('../middleware/tokenGen')
 const sendMailer = require('../middleware/sendMailer')
+var redis = require('redis');
+var client = redis.createClient();
 
 /*
 *@description : To handel regester of new user
@@ -45,14 +47,48 @@ module.exports.userControllerRegister = (req, res) => {
 
                     //  A token is passed for authentication. It supports the stateless API calls.
                     const token = tokenGenn.tokenGen(payload)
-                    const url = `http://localhost:3000/#!/emailverification/${token.token}`
+                    console.log("111", token.token)
+                    client.set(payload.email.toString(), token.token.toString(), function (err, result) {
+                        if (err) {
+                            console.log("errr in setting token in redis cache");
+                        }
+                        else {
+                            console.log("token saved in redis", result)
+                            console.log("payload data", payload._id)
+                        }
+                    })
+                    const url = `http://localhost:3000/emailverification`
+                    const tok = token.token
 
-                    //The Nodemailer module makes it easy to send url mails from your computer.
-                    sendMailer.sendMailer(url)
-                    return res.status(200).send({
-                        message: data,
-                        url: url,
-                        token: token
+                    const reqq = {}
+                    reqq.url = url
+                    reqq.tok = tok
+
+                    services.userServicegetUrl(reqq, (err, dataa) => {
+                        console.log("emailofbody" + req.body.email)
+                        if (err) {
+                            console.log(err)
+                            return res.status(500).send(err)
+                        } else {
+                            console.log("suiceeeeeeeeeeeeeee" + dataa)
+
+                            console.log("ggggggggggg " + dataa)
+                            var a = "http://localhost:3000/" + dataa.urlCode
+                            console.log(a)
+                            var subject = "email verification short url link"
+                            sendMailer.sendMailer(a, subject)
+
+
+
+                            //The Nodemailer module makes it easy to send url mails from your computer.
+                            console.log("yyyyyyyyyyyyyyyyyyyyy", dataa.urlCode)
+                            return res.status(200).send({
+                                message: data,
+                                url: url,
+                                token: token,
+                                urlCode: dataa.urlCode
+                            })
+                        }
                     })
                 }
             })
@@ -137,17 +173,47 @@ module.exports.userControllerForgotPassword = (req, res) => {
 
                     //  A token is passed for authentication. It supports the stateless API calls.
                     const token = tokenGenn.tokenGen(payload)
-                    const url = `http://localhost:3000/#!/resetpassword/${token.token}`
+                    client.set(payload.email.toString(), token.token.toString(), function (err, result) {
+                        if (err) {
+                            console.log("errr in setting token in redis cache");
+                        }
+                        else {
+                            console.log("token saved in redis", result)
+                            console.log("payload data", payload._id)
+                        }
+                    })
+                    const url = `http://localhost:3000/resetpassword`
+                    const tok = token.token
 
-                    //The Nodemailer module makes it easy to send url mails from your computer.
-                    sendMailer.sendMailer(url)
-                    return res.status(200).send({
-                        message: data,
-                        url: url,
-                        token: token
+                    const reqq = {}
+                    reqq.url = url
+                    reqq.tok = tok
+
+                    services.userServicegetUrl(reqq, (err, dataa) => {
+                        console.log("emailofbody" + req.body.email)
+                        if (err) {
+                            console.log(err)
+                            return res.status(500).send(err)
+                        } else {
+                            console.log("suiceeeeeeeeeeeeeee" + dataa)
+
+                            console.log("ggggggggggg " + dataa)
+                            var a = "http://localhost:3000/" + dataa.urlCode
+                            console.log(a)
+                            //The Nodemailer module makes it easy to send url mails from your computer.
+                            var subject = "reset password short url link"
+                            sendMailer.sendMailer(a, subject)
+
+                            return res.status(200).send({
+                                message: data,
+                                url: url,
+                                token: token,
+                                urlCode: dataa.urlCode
+                            })
+                        }
+
                     })
                 }
-
             })
         }
     } catch (err) {
@@ -207,3 +273,53 @@ module.exports.userControllerEmailVerification = (req, res) => {
         res.send(err)
     }
 }
+
+
+
+module.exports.userControllerPosturl = (req, res) => {
+    try {
+        model.userModelPosturl(req, (err, data) => {
+            if (err) {
+                res.status(500).send(err)
+            } else {
+
+                console.log("hesssssssssssss")
+                console.log(data[0].originalUrl)
+                //  console.log(data.originalUrl)
+                // res.headers(data.token)
+                // res.headers(data.token)
+                console.log("rrrrrrrrrr", data[0].token)
+
+                res.status(200).send(data)
+            }
+        })
+
+    } catch (err) {
+        console.log("error in user controllerreset password", err)
+        res.send(err)
+    }
+}
+
+module.exports.userControllerUploadImage = (req, res) => {
+    console.log("\npic location --------<", req.file.location);
+
+    services.userServicesUploadImage(req, (err, data) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send({
+                message: err
+            })
+        } else {
+            console.log("message is coming here", data)
+            return res.status(200).send({
+
+                message: data
+            });
+        }
+
+    })
+
+}
+
+
+

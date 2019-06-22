@@ -17,9 +17,26 @@
 
 const jwt=require('jsonwebtoken')
 const secret='fundoo'
+
+var redis = require('redis');
+ var client = redis.createClient();
+
+
+
 module.exports.tokenVerify=(req,res,next)=>{
     try{
-    var token=req.headers['token']
+   // var token=req.headers['token']
+
+   client.get(req.body.email, function (err, token) {
+    if (err) {
+     //   console.log(err in token)
+    }
+    else {
+        console.log("token provided is:", token);
+ 
+        };
+        console.log("reply", token)
+    
     if(token){
     jwt.verify(token,secret,(err,decoded)=>{
         if(err){
@@ -33,9 +50,13 @@ module.exports.tokenVerify=(req,res,next)=>{
         }
 
     })
+
 }else {
     console.log("token is not there in header")
-}}
+
+}
+   })
+}
 catch(err){
     console.log("error occured in token verify block",err)
     res.send(err)

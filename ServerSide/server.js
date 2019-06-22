@@ -9,6 +9,31 @@ const app = express()
 const cors = require('cors')
 app.use(cors())
 
+/**
+ * express-winston provides middlewares for request and error logging of your express.js application. 
+ * It uses 'whitelists' to select properties from the request and (new in 0.2.x) response objects.
+ */
+var expressWinston = require('express-winston');
+var winston = require('winston')
+app.use(expressWinston.logger({
+  transports: [
+    new winston.transports.Console()
+  ],
+  format: winston.format.combine(
+    winston.format.colorize(),
+    winston.format.json()
+  )
+}));
+app.use(expressWinston.errorLogger({
+  transports: [
+    new winston.transports.Console()
+  ],
+  format: winston.format.combine(
+    winston.format.colorize(),
+    winston.format.json()
+  )
+}));
+
 /** This module loads environment variables from a .env file that you create and
  *  adds them to the process.env object that is made available to the application.
  *  */
@@ -34,7 +59,7 @@ app.use('/', router)
 //})
 
 app.listen(process.env.PORT, () => {
-    console.log("server port 3000 is connected")
+  console.log("server port 3000 is connected")
 })
 
 var url = require('./config/dbConfiguration')
@@ -43,12 +68,24 @@ var url = require('./config/dbConfiguration')
 var mongoose = require('mongoose')
 mongoose.Promise = global.Promise;
 mongoose.connect(url.url, { useNewUrlParser: true })
-    .then(() => {
-        console.log("successfully connected to data base")
+  .then(() => {
+    console.log("successfully connected to data base")
 
-    }).catch((err) => {
-        console.log("could not connected to the data base",err)
-        process.exit()
-    })
+  }).catch((err) => {
+    console.log("could not connected to the data base", err)
+    process.exit()
+  })
 
-module.exports=app
+
+var redis = require('redis');
+var client = redis.createClient();
+
+client.on('connect', function () {
+  console.log('Redis client connected');
+});
+
+client.on('error', function (err) {
+  console.log('Something went wrong ' + err);
+});
+
+module.exports = app

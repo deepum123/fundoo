@@ -18,17 +18,17 @@ const model = require('../app/model/userModel')
 *@param       : callback (response from server)
 */
 module.exports.userServiceRegister = (req, callback) => {
-    try{
-    model.userModelRegister(req, (err, data) => {
-        if (err) {
-         return   callback(err)
-        } else {
-            console.log("user service data :", data)
-          return  callback(null, data)
-        }
-    })
-    }catch(err){
-        console.log("error occured in user service register block",err)
+    try {
+        model.userModelRegister(req, (err, data) => {
+            if (err) {
+                return callback(err)
+            } else {
+                console.log("user service data :", data)
+                return callback(null, data)
+            }
+        })
+    } catch (err) {
+        console.log("error occured in user service register block", err)
         callback(err)
     }
 }
@@ -40,18 +40,18 @@ module.exports.userServiceRegister = (req, callback) => {
 *@param       : callback (response from server)
 */
 module.exports.userServiceLogin = (req, callback) => {
-    try{
-    model.userModelLogin(req, (err, data) => {
-        if (err) {
-          return  callback(err)
-        } else {
-          return  callback(null, data)
-        }
-    })
-}catch(err){
-    console.log("error occured in user services block",err)
-    callback(err)
-}
+    try {
+        model.userModelLogin(req, (err, data) => {
+            if (err) {
+                return callback(err)
+            } else {
+                return callback(null, data)
+            }
+        })
+    } catch (err) {
+        console.log("error occured in user services block", err)
+        callback(err)
+    }
 }
 
 /* 
@@ -59,57 +59,87 @@ module.exports.userServiceLogin = (req, callback) => {
 *@param       : req (request from client)
 *@param       : callback (response from server)
 */
-module.exports.userServiceForgotPassword=(req,callback)=>{
-    try{
-        model.userModelForgotPassword(req,(err,data)=>{
-            if(err){
-              return  callback(err)
-            }else{
-             return   callback(null,data)
+module.exports.userServiceForgotPassword = (req, callback) => {
+    try {
+        model.userModelForgotPassword(req, (err, data) => {
+            if (err) {
+                return callback(err)
+            } else {
+                return callback(null, data)
             }
         })
-    }catch(err){
-        console.log("error occured in user service forgot password",err)
+    } catch (err) {
+        console.log("error occured in user service forgot password", err)
         callback(err)
     }
 }
 
-    /* 
+/* 
 *@description : To send new user reset password data to models/userModel
 *@param       : req (request from client)
 *@param       : callback (response from server)
 */
-module.exports.userServiceResetPassword=(req,callback)=>{
-    try{
-    model.userModelResetPassword(req,(err,data)=>{
-        if(err){
-         return   callback(err)
-        }else{
-         return   callback(null,data)
-        }
-    })
-}catch(err){
-    console.log("error occcures in user model reset password block",err)
-    callback(err)
-}
+module.exports.userServiceResetPassword = (req, callback) => {
+    try {
+        model.userModelResetPassword(req, (err, data) => {
+            if (err) {
+                return callback(err)
+            } else {
+                return callback(null, data)
+            }
+        })
+    } catch (err) {
+        console.log("error occcures in user model reset password block", err)
+        callback(err)
+    }
 }
 
-    /* 
+/* 
 *@description : To send new user user service email verification to models/userModel
 *@param       : req (request from client)
 *@param       : callback (response from server)
 */
-module.exports.userServiceEmailVerification=(req,callback)=>{
-    try{
-    model.userModelEmailVerification(req,(err,data)=>{
-        if(err){
-         return   callback(err)
-        }else{
-         return   callback(null,data)
-        }
-    })
-}catch(err){
-    console.log("error occcures in user model reset password block",err)
-    callback(err)
+module.exports.userServiceEmailVerification = (req, callback) => {
+    try {
+        model.userModelEmailVerification(req, (err, data) => {
+            if (err) {
+                return callback(err)
+            } else {
+                return callback(null, data)
+            }
+        })
+    } catch (err) {
+        console.log("error occcures in user model reset password block", err)
+        callback(err)
+    }
 }
+
+module.exports.userServicegetUrl = (req, callback) => {
+    try {
+        model.userModelgetUrl(req, (err, data) => {
+            if (err) {
+                return callback(err)
+            } else {
+                return callback(null, data)
+            }
+        })
+    } catch (err) {
+        console.log("error occcures in user model reset password block", err)
+        callback(err)
+    }
+}
+
+module.exports.userServicesUploadImage = (req, callback) => {
+    try {
+        model.userModelUploadImage(req, (err, data) => {
+            if (err) {
+                return callback(err)
+            } else {
+                return callback(null, data)
+            }
+        })
+    } catch (err) {
+        console.log("error occcures in user model reset password block", err)
+        callback(err)
+    }
 }

@@ -13,9 +13,8 @@
 
 
 const nodemailer=require('nodemailer')
-.
 
-module.exports.sendMailer=(url)=>{
+module.exports.sendMailer=(url,subjectt)=>{
     try{
  //Use the username and password from your selected email provider to send an email. 
     const transpoter=nodemailer.createTransport({
@@ -29,8 +28,8 @@ module.exports.sendMailer=(url)=>{
     const mailOption={
         from:'deepum648@gmail.com',
         to:'deepum648@gmail.com',
-        subject:'fundoo app reset password link',
-        text:'click this link and reset your password'+url
+        subject:subjectt,
+        text:'click this link and reset your password '+ url
     }
     transpoter.sendMail(mailOption,(err,info)=>{
         if(err){
