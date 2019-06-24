@@ -12,7 +12,7 @@
 
 const model = require('../app/model/userModel')
 
-/* 
+/**
 *@description : To send new user register data to models/userModel
 *@param       : req (request from client)
 *@param       : callback (response from server)
@@ -34,7 +34,7 @@ module.exports.userServiceRegister = (req, callback) => {
 }
 
 
-/* 
+/**
 *@description : To send new user login data to models/userModel
 *@param       : req (request from client)
 *@param       : callback (response from server)
@@ -54,7 +54,7 @@ module.exports.userServiceLogin = (req, callback) => {
     }
 }
 
-/* 
+/**  
 *@description : To send new user forgot password data to models/userModel
 *@param       : req (request from client)
 *@param       : callback (response from server)
@@ -74,7 +74,7 @@ module.exports.userServiceForgotPassword = (req, callback) => {
     }
 }
 
-/* 
+/**  
 *@description : To send new user reset password data to models/userModel
 *@param       : req (request from client)
 *@param       : callback (response from server)
@@ -94,7 +94,7 @@ module.exports.userServiceResetPassword = (req, callback) => {
     }
 }
 
-/* 
+/**  
 *@description : To send new user user service email verification to models/userModel
 *@param       : req (request from client)
 *@param       : callback (response from server)
@@ -114,6 +114,11 @@ module.exports.userServiceEmailVerification = (req, callback) => {
     }
 }
 
+/**  
+*@description : To send new user user service getUrl to models/userModel
+*@param       : req (request from client)
+*@param       : callback (response from server)
+*/
 module.exports.userServicegetUrl = (req, callback) => {
     try {
         model.userModelgetUrl(req, (err, data) => {
@@ -129,6 +134,11 @@ module.exports.userServicegetUrl = (req, callback) => {
     }
 }
 
+/**  
+*@description : To send new user user service UploadImage to models/userModel
+*@param       : req (request from client)
+*@param       : callback (response from server)
+*/
 module.exports.userServicesUploadImage = (req, callback) => {
     try {
         model.userModelUploadImage(req, (err, data) => {

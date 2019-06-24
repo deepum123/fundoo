@@ -8,8 +8,8 @@
  * @since     : 15.06.2019
  * 
  *************************************************************************************/
-const model = require('../app/model/userModel')
 const services = require('../services/userServices')
+const usermodel=require('../app/model/userModel')
 const tokenGenn = require('../middleware/tokenGen')
 const sendMailer = require('../middleware/sendMailer')
 var redis = require('redis');
@@ -62,7 +62,7 @@ module.exports.userControllerRegister = (req, res) => {
 
                     const reqq = {}
                     reqq.url = url
-                    reqq.tok = tok
+                    reqq.email = req.body.email
 
                     services.userServicegetUrl(reqq, (err, dataa) => {
                         console.log("emailofbody" + req.body.email)
@@ -98,7 +98,7 @@ module.exports.userControllerRegister = (req, res) => {
         res.send(err)
     }
 }
-/*
+/** 
 *@description : To handel login of  user
 *@param       : req (request from client)
 *@param       : res (response from server)
@@ -147,7 +147,7 @@ module.exports.userControllerLogin = (req, res) => {
     }
 }
 
-/*
+/**
 *@description : To handel forgot password of user
 *@param       : req (request from client)
 *@param       : res (response from server)
@@ -222,7 +222,7 @@ module.exports.userControllerForgotPassword = (req, res) => {
     }
 }
 
-/*
+/**
 *@description : To handel reset password of  user
 *@param       : req (request from client)
 *@param       : res (response from server)
@@ -252,8 +252,8 @@ module.exports.userControllerResetPassword = (req, res) => {
     }
 }
 
-/*
-*@description : To handel the email verification of  user
+/**
+*@description : To handel the emailVerification of  user
 *@param       : req (request from client)
 *@param       : res (response from server)
 */
@@ -275,10 +275,14 @@ module.exports.userControllerEmailVerification = (req, res) => {
 }
 
 
-
+/**
+*@description : To handel the userControllerPosturl of  user
+*@param       : req (request from client)
+*@param       : res (response from server)
+*/
 module.exports.userControllerPosturl = (req, res) => {
     try {
-        model.userModelPosturl(req, (err, data) => {
+        usermodel.userModelPosturl(req, (err, data) => {
             if (err) {
                 res.status(500).send(err)
             } else {
@@ -288,9 +292,8 @@ module.exports.userControllerPosturl = (req, res) => {
                 //  console.log(data.originalUrl)
                 // res.headers(data.token)
                 // res.headers(data.token)
-                console.log("rrrrrrrrrr", data[0].token)
-
-                res.status(200).send(data)
+                console.log("rrrrrrrrrr", data[0].email)
+               res.status(200).send(data)
             }
         })
 
@@ -299,7 +302,11 @@ module.exports.userControllerPosturl = (req, res) => {
         res.send(err)
     }
 }
-
+/**
+*@description : To handel the ControllerUploadImage of user
+*@param       : req (request from client)
+*@param       : res (response from server)
+*/
 module.exports.userControllerUploadImage = (req, res) => {
     console.log("\npic location --------<", req.file.location);
 

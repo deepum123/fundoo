@@ -18,5 +18,14 @@
   
     {
         "password":"123qweasdzxc"
-    }
+    },
+    "shorturl":{
+        "urlCode":"vckp9cMz_"
+    },
+    "verify":{
+        "email":"racdde3457@gmail.com"
+    },
+   
+        "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoicmFkZHJnZHJmQGdtYWlsLmNvbSJ9LCJpYXQiOjE1NjEzODI3MDAsImV4cCI6MTU2MTM4OTkwMH0.rU2iokVZkbJRn9NqOEHuRxguHKyHaGgi_YttXOrxR34"
+    
 }
