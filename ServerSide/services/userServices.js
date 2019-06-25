@@ -11,15 +11,15 @@
  *************************************************************************************/
 
 const model = require('../app/model/userModel')
-
+const dbservices=require('../config/dbServices')
 /**
-*@description : To send new user register data to models/userModel
+*@description : To send new user register data to dbservices
 *@param       : req (request from client)
 *@param       : callback (response from server)
 */
 module.exports.userServiceRegister = (req, callback) => {
     try {
-        model.userModelRegister(req, (err, data) => {
+        dbservices.register(req, (err, data) => {
             if (err) {
                 return callback(err)
             } else {
@@ -35,13 +35,13 @@ module.exports.userServiceRegister = (req, callback) => {
 
 
 /**
-*@description : To send new user login data to models/userModel
+*@description : To send new user login data to dbservices
 *@param       : req (request from client)
 *@param       : callback (response from server)
 */
 module.exports.userServiceLogin = (req, callback) => {
     try {
-        model.userModelLogin(req, (err, data) => {
+        dbservices.login(req, (err, data) => {
             if (err) {
                 return callback(err)
             } else {
@@ -55,13 +55,13 @@ module.exports.userServiceLogin = (req, callback) => {
 }
 
 /**  
-*@description : To send new user forgot password data to models/userModel
+*@description : To send new user forgot password data to dbservices
 *@param       : req (request from client)
 *@param       : callback (response from server)
 */
 module.exports.userServiceForgotPassword = (req, callback) => {
     try {
-        model.userModelForgotPassword(req, (err, data) => {
+        dbservices.forgetpassword(req, (err, data) => {
             if (err) {
                 return callback(err)
             } else {
@@ -75,13 +75,13 @@ module.exports.userServiceForgotPassword = (req, callback) => {
 }
 
 /**  
-*@description : To send new user reset password data to models/userModel
+*@description : To send new user reset password data to dbservices
 *@param       : req (request from client)
 *@param       : callback (response from server)
 */
 module.exports.userServiceResetPassword = (req, callback) => {
     try {
-        model.userModelResetPassword(req, (err, data) => {
+        dbservices.resetPassword(req, (err, data) => {
             if (err) {
                 return callback(err)
             } else {
@@ -95,13 +95,13 @@ module.exports.userServiceResetPassword = (req, callback) => {
 }
 
 /**  
-*@description : To send new user user service email verification to models/userModel
+*@description : To send new user user service email verification to dbservices
 *@param       : req (request from client)
 *@param       : callback (response from server)
 */
 module.exports.userServiceEmailVerification = (req, callback) => {
     try {
-        model.userModelEmailVerification(req, (err, data) => {
+        dbservices.verification(req, (err, data) => {
             if (err) {
                 return callback(err)
             } else {
@@ -115,13 +115,13 @@ module.exports.userServiceEmailVerification = (req, callback) => {
 }
 
 /**  
-*@description : To send new user user service getUrl to models/userModel
+*@description : To send new user user service getUrl to dbservices
 *@param       : req (request from client)
 *@param       : callback (response from server)
 */
 module.exports.userServicegetUrl = (req, callback) => {
     try {
-        model.userModelgetUrl(req, (err, data) => {
+        dbservices.getUrl(req, (err, data) => {
             if (err) {
                 return callback(err)
             } else {
@@ -135,13 +135,13 @@ module.exports.userServicegetUrl = (req, callback) => {
 }
 
 /**  
-*@description : To send new user user service UploadImage to models/userModel
+*@description : To send new user user service UploadImage to dbservices
 *@param       : req (request from client)
 *@param       : callback (response from server)
 */
 module.exports.userServicesUploadImage = (req, callback) => {
     try {
-        model.userModelUploadImage(req, (err, data) => {
+        dbservices.uploadPhoto(req, (err, data) => {
             if (err) {
                 return callback(err)
             } else {

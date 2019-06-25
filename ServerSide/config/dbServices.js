@@ -180,11 +180,7 @@ dbService.prototype.uploadPhoto = (req, callback) => {
     try {
         console.log("request in model... ==>", req.decoded.payload.email);
 
-        model.user.findOneAndUpdate({ email: req.decoded.payload.email }, {
-            $set: {
-                uploadImage: req.file.location
-            },
-        }, (err, data) => {
+        model.user.findOneAndUpdate({ email: req.decoded.payload.email }, { uploadImage: req.file.location }, (err, data) => {
             if (err) {
                 console.log("Error in");
                 return callback(err);
