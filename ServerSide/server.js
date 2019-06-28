@@ -52,8 +52,10 @@ app.use(bodyParser.json())
 var validators = require('express-validator')
 app.use(validators())
 
-var router = require('./router/routers')
-app.use('/', router)
+var userRouter = require('./router/userRouter')
+var noteRouter=require('./router/noteRouter')
+app.use('/', userRouter)
+app.use('/',noteRouter)
 //app.get('/', function (req, res) {    
 // res.send('Hello World ,how are you..?????')
 //})
@@ -67,7 +69,7 @@ var url = require('./config/dbConfiguration')
 //Creates a connection to a MongoDB instance
 var mongoose = require('mongoose')
 mongoose.Promise = global.Promise;
-mongoose.connect(url.url, { useNewUrlParser: true })
+mongoose.connect(url.url, { useCreateIndex: true, useNewUrlParser: true })
   .then(() => {
     console.log("successfully connected to data base")
 
