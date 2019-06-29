@@ -7,7 +7,6 @@ const router=express.Router()
 
 router.post('/createNote',auth.auth,noteController.noteControllerCreateNote)
 router.post('/deleteNote',auth.auth,noteController.noteControllerDeleteNote)
-router.post('/getNote',auth.auth,noteController.noteControllerGetNote)
 router.post('/getAllNotes',auth.auth,noteController.noteControllerGetNotes)
 router.post('/isArchive',auth.auth,noteController.noteControllerIsArchive)
 router.post('/isPinned',auth.auth,noteController.noteControllerIsPinned)

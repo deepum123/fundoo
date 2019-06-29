@@ -1,9 +1,25 @@
 
+
+
+
+
+/**
+ * express-winston provides middlewares for request and error logging of your express.js application. 
+ * It uses 'whitelists' to select properties from the request and (new in 0.2.x) response objects.
+ */
+
+const winston = require('winston')
+const consoleTransport = new winston.transports.Console()
+const myWinstonOptions = {
+    transports: [consoleTransport]
+}
+const logger = new winston.createLogger(myWinstonOptions)
+
 const noteService=require('../services/Internal/noteServices')
 
 
 module.exports.noteControllerCreateNote=(req,res)=>{
-   
+    logger.info(" create note req body data ",req.body)
     var data={
            userId:req.id,
            title:req.body.title,
@@ -11,7 +27,7 @@ module.exports.noteControllerCreateNote=(req,res)=>{
            color:req.body.color
          
     }
-    console.log("*******",data.color)
+  
   noteService.noteServiceCreateNote(data,(err,data)=>{
        if(err){
            console.log("error occured in note controller create note ")
@@ -21,6 +37,7 @@ module.exports.noteControllerCreateNote=(req,res)=>{
                data:err
            })
        }else{
+        logger.info(" create note res  data ",data)
            res.status(200).send({
                success:true,
                message:"successfully new note created",
@@ -32,6 +49,7 @@ module.exports.noteControllerCreateNote=(req,res)=>{
 }
 
 module.exports.noteControllerGetNotes=(req,res)=>{
+    logger.info("  get notes req body   data ",req.body)
     var data ={
         userId:req.id
     }
@@ -43,6 +61,7 @@ module.exports.noteControllerGetNotes=(req,res)=>{
                 data:err
             })
         }else{
+            logger.info(" get notes res  data ",data)
             res.status(200).send({
                 success:true,
                 message:"successfully get all notes created",
@@ -54,7 +73,7 @@ module.exports.noteControllerGetNotes=(req,res)=>{
 }
 
 module.exports.noteControllerDeleteNote=(req,res)=>{
-
+    logger.info(" note delete note req body   data ",req.body)
     var data={
         noteid:req.body.noteid
              }
@@ -66,6 +85,7 @@ module.exports.noteControllerDeleteNote=(req,res)=>{
                         data:err
                     })
                 }else{
+                    logger.info(" delete note  res  data ",data)
                     res.status(200).send({
                         success:true,
                         message:"successfully  succesfully delete the note",
@@ -75,30 +95,10 @@ module.exports.noteControllerDeleteNote=(req,res)=>{
                 }
             })
         }
-module.exports.noteControllerGetNote=(req,res)=>{
-    var data={
-          userId:req.id,
-        noteid:req.body.noteid
-    }
-    noteService.noteServiceGetNote(data,(err,data)=>{
-        if(err){
-            res.status(500).send({
-                success:false,
-                message:"error occured in  get note function",
-                data:err
-            })
-        }else{
-            res.status(200).send({
-                success:true,
-                message:"successfully  get the perticular node",
-                data:data
-            })
 
-        }
-    })
-}
 
 module.exports.noteControllerIsArchive=(req,res)=>{
+    logger.info(" note is archive req body   data ",req.body)
     var data={
         noteid:req.body.noteid,
         archive:req.body.archive
@@ -112,6 +112,7 @@ noteService.noteServiceIsArchive(data,(err,data)=>{
             data:err
         }) 
     }else{
+        logger.info(" note is archive res  data ",data)
         res.status(200).send({
             success:true,
             message:"successfully note archive done",
@@ -123,6 +124,7 @@ noteService.noteServiceIsArchive(data,(err,data)=>{
 }
 
 module.exports.noteControllerIsPinned=(req,res)=>{
+    logger.info(" note is pinned req body   data ",req.body)
     var data={
         noteid:req.body.noteid,
         pinned:req.body.pinned
@@ -136,6 +138,7 @@ noteService.noteServiceIsPinned(data,(err,data)=>{
             data:err
         }) 
     }else{
+        logger.info(" note is pinned res  data ",data)
         res.status(200).send({
             success:true,
             message:"successfully note pinned function is  done",
@@ -146,6 +149,7 @@ noteService.noteServiceIsPinned(data,(err,data)=>{
 }
 
 module.exports.noteControllerIsTrashed=(req,res)=>{
+    logger.info(" note is  trash req body   data ",req.body)
     var data={
         noteid:req.body.noteid,
         trash:req.body.trash
@@ -159,6 +163,7 @@ noteService.noteServiceIsTrashed(data,(err,data)=>{
             data:err
         }) 
     }else{
+        logger.info(" note is trashed res  data ",data)
         res.status(200).send({
             success:true,
             message:"successfully note Trashed function is  done",
@@ -168,6 +173,7 @@ noteService.noteServiceIsTrashed(data,(err,data)=>{
 })
 }
 module.exports.noteControllerEditTitle=(req,res)=>{
+    logger.info(" note  edit title req body   data ",req.body)
     var data={
         noteid:req.body.noteid,
         newtitle:req.body.newtitle
@@ -181,6 +187,7 @@ noteService.noteServiceEditTitle(data,(err,data)=>{
             data:err
         }) 
     }else{
+        logger.info(" note edit title res  data ",data)
         res.status(200).send({
             success:true,
             message:"successfully note edit title function is  done",
@@ -191,6 +198,7 @@ noteService.noteServiceEditTitle(data,(err,data)=>{
 }
 
 module.exports.noteControllerEditDescription=(req,res)=>{
+    logger.info(" note edit description  req body   data ",req.body)
     var data={
         noteid:req.body.noteid,
         description:req.body.description
@@ -204,6 +212,7 @@ module.exports.noteControllerEditDescription=(req,res)=>{
                 data:err
             }) 
         }else{
+            logger.info(" note edit description  res  data ",data)
             res.status(200).send({
                 success:true,
                 message:"successfully note edit decription function is  done",
@@ -214,18 +223,21 @@ module.exports.noteControllerEditDescription=(req,res)=>{
 
 }
 module.exports.noteControllerUpdateColor=(req,res)=>{
+    logger.info(" note update color req body   data ",req.body)
     var data={
         noteid:req.body.noteid,
         color:req.body.color 
     }
     noteService.noteServiceUpdateColor(data,(err,data)=>{
         if(err){
+            
             res.status(500).send({
                 success:false,
                 message:"error in note controller update color  function",
                 data:err
             }) 
         }else{
+            logger.info(" note update color res  data ",data)
             res.status(200).send({
                 success:true,
                 message:"successfully note edit decription function is  done",
@@ -235,6 +247,7 @@ module.exports.noteControllerUpdateColor=(req,res)=>{
     })
 }
 module.exports.noteControllerNoteRemainder=(req,res)=>{
+    logger.info(" note remainder req body   data ",req.body)
     var data={
         noteid:req.body.noteid,
         remainder:req.body.remainder
@@ -247,6 +260,7 @@ module.exports.noteControllerNoteRemainder=(req,res)=>{
                 data:err
             }) 
         }else{
+            logger.info(" note remainder res  data ",data)
             res.status(200).send({
                 success:true,
                 message:"successfully note edit decription function is  done",
@@ -257,6 +271,7 @@ module.exports.noteControllerNoteRemainder=(req,res)=>{
 }
 
 module.exports.noteControllerErashTrash=(req,res)=>{
+    logger.info(" note controller erash trash   req body   data ",req.body)
     var data ={
         userId:req.id
     }
@@ -268,6 +283,7 @@ module.exports.noteControllerErashTrash=(req,res)=>{
                 data:err
             }) 
         }else{
+            logger.info(" note erash trash res data  ",data)
             res.status(200).send({
                 success:true,
                 message:"successfully note edit decription function is  done",
@@ -277,6 +293,7 @@ module.exports.noteControllerErashTrash=(req,res)=>{
     })
 }
 module.exports.noteControllerUpdateImage=(req,res)=>{
+    logger.info(" note image update req body   data ",req.body)
     console.log("\npic location --------<", req.file.location);
     var data={  
          address:req.file.location, 
@@ -289,7 +306,7 @@ module.exports.noteControllerUpdateImage=(req,res)=>{
                 message: err
             })
         } else {
-            console.log("message is coming here", data)
+            logger.info(" note update iamge  res  data ",data)
             return res.status(200).send({
                 success:true,
                 message: "s3 api successfully completed",
@@ -302,9 +319,12 @@ module.exports.noteControllerUpdateImage=(req,res)=>{
 }
 
 module.exports.noteControllerSearch=(req,res)=>{
+    logger.info(" note search   req body   data ",req.body)
     var data={
         userId:req.id,
+
       noteid:req.body.noteid,
+      description:req.body.description,
       title:req.body.title,
       color:req.body.color,
   }
@@ -316,6 +336,7 @@ module.exports.noteControllerSearch=(req,res)=>{
               data:err
           })
       }else{
+        logger.info(" note search res  data ",data)
           res.status(200).send({
               success:true,
               message:"successfully  get the perticular node",

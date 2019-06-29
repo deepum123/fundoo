@@ -83,18 +83,7 @@ class notemodel {
         })
     }
 
-    get(data, callback) {
-console.log("&&&&&",data)
-        note.find({'_id': data.noteid }, (err, data) => {
-            if (err) {
-                callback(err)
-            } else {
-                callback(null, data)
-                console.log("&&&&&",data)
-            }
 
-        })
-    }
     Update(data,field,callback) {
         console.log(data,"%%%%%%%%%%%",field)
         note.findOneAndUpdate({ '_id': data.noteid },field,(err,data)=>{
@@ -122,7 +111,7 @@ console.log("&&&&&",data)
         })
     }
     search(data,field,callback){
-        note.find([ { 'userId': data.userId  }&{  '_id': data.noteid }||{ description: data.description} ], (err, data) => {
+        note.find({ $and: [{ 'userId': data.userId  }, field] }, (err, data) => {
             if (err) {
                 callback(err)
             } else {

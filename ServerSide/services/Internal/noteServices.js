@@ -34,17 +34,7 @@ class noteServices{
             } 
         })
     }
-    noteServiceGetNote(data,callback){
-           
-        noteModel.get(data,(err,data)=>{
-            if(err){
-                callback(err)
-            }else {
-                callback(null,data)
-            } 
-        })
 
-    }
     noteServiceIsArchive(data,callback){
         var field={
             archive:data.archive,
@@ -168,9 +158,11 @@ class noteServices{
         var field= 
             {
                 $or: [
-                    { 'userId': data.userId},
+                  { "description":data.description},
                   {  '_id': data.noteid },
-                  { title: data.title }
+                  { title: data.title },
+                  { color: data.color },
+
                 ]
               }
            

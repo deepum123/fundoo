@@ -9,30 +9,7 @@ const app = express()
 const cors = require('cors')
 app.use(cors())
 
-/**
- * express-winston provides middlewares for request and error logging of your express.js application. 
- * It uses 'whitelists' to select properties from the request and (new in 0.2.x) response objects.
- */
-var expressWinston = require('express-winston');
-var winston = require('winston')
-app.use(expressWinston.logger({
-  transports: [
-    new winston.transports.Console()
-  ],
-  format: winston.format.combine(
-    winston.format.colorize(),
-    winston.format.json()
-  )
-}));
-app.use(expressWinston.errorLogger({
-  transports: [
-    new winston.transports.Console()
-  ],
-  format: winston.format.combine(
-    winston.format.colorize(),
-    winston.format.json()
-  )
-}));
+
 
 /** This module loads environment variables from a .env file that you create and
  *  adds them to the process.env object that is made available to the application.
