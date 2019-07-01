@@ -72,11 +72,15 @@ var nameValidator = [
 var user = mongoose.model('user', userSchema)
 
 // short url schema
-class mongooServices {
+class userModel {
     constructor() { }
 
 
-
+    /*******************************************************************************************************
+     * @description:it will add new user  using user schema and save the data into the database
+     * @param {*request from frontend} objectNote
+     * @param {*response from  backend to frontend } callback
+     ******************************************************************************************************/
     put(data, callback) {
         try {
             var newUser = new user({
@@ -103,9 +107,14 @@ class mongooServices {
         }
     }
 
+    /**************************************************************************** 
+    *@description : To find the registered user in database using find()
+    *@param       : body (request from client)
+    *@param       : callback (response from server)
+    ****************************************************************************/
     getVer(data, callback) {
         try {
-            console.log("@@@@@@@@@@",data.email)
+            console.log("@@@@@@@@@@", data.email)
             user.find({ $and: [{ 'email': data.email }, { isVerified: true }] }, (err, result) => {
                 if (err) {
                     console.log("error occured in email finding  ")
@@ -136,6 +145,13 @@ class mongooServices {
             callback(err)
         }
     }
+
+
+    /**************************************************************************** 
+    *@description :  To find the registered user in database using find()
+    *@param       : req (request from client)
+    *@param       : callback (response from server)
+    ****************************************************************************/
     get(data, callback) {
         try {
             user.find({ 'email': data.email }, (err, data) => {
@@ -154,9 +170,14 @@ class mongooServices {
         }
     }
 
+    /**************************************************************************** 
+*@description : it will update the perticular user based data 
+*@param       : req (request from client)
+*@param       : callback (response from server)
+****************************************************************************/
     Update(data, field, callback) {
         try {
-        
+
             user.findOneAndUpdate({ '_id': data.userId }, field, (err, result) => {
                 if (err) {
                     console.log("token on decode email", err);
@@ -174,6 +195,6 @@ class mongooServices {
         }
     }
 }
-const model = new mongooServices()
-module.exports = model
+const userModelObj = new userModel()
+module.exports = userModelObj
 

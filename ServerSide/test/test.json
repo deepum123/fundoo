@@ -26,6 +26,61 @@
         "email":"racdde3457@gmail.com"
     },
    
-        "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoicmFkZHJnZHJmQGdtYWlsLmNvbSJ9LCJpYXQiOjE1NjEzODI3MDAsImV4cCI6MTU2MTM4OTkwMH0.rU2iokVZkbJRn9NqOEHuRxguHKyHaGgi_YttXOrxR34"
-    
+    "createNote":{
+        "_id": "5d15d9d7860258428a513cef",
+        "title": "first note",
+        "description": "hello",
+        "color": "grey"
+    },
+    "isArchive":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "archive":"true"
+
+    },
+    "isTrashed":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "trash":"true"
+
+    },
+    "isPinned":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "pinned":"true"
+    },
+    "editTitle":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "newtitle":"hii helloo"
+    },
+    "editDescription":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "description":"bridge labz"
+
+    },
+    "updateColor":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "color":"blue"
+
+    },
+    "remainder":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "remainder":"2 o clock"
+    },
+    "search":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "color":"blue"
+
+    } ,
+    "getAllNotes":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef"
+        
+
+    } 
 }

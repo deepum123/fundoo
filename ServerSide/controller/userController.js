@@ -257,6 +257,8 @@ module.exports.userControllerVerification = (req, res) => {
 *@param       : res (response from server)
 */
 module.exports.userControllerUploadImage = (req, res) => {
+    try{
+
     console.log("\npic location --------<", req.file.location);
     var data={  
          address:req.file.location, 
@@ -278,7 +280,9 @@ module.exports.userControllerUploadImage = (req, res) => {
         }
 
     })
-
+ }catch(err){
+        res.send(err)
+    }
 }
 
 
