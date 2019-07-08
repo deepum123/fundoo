@@ -32,20 +32,37 @@ function readfile() {
 * @description: test for isTrashed api
 ****************************************************************************************/
 describe("test status of isTrashed api", function () {
-    it("Should return 200 and confirmation for valid input", function (done) {
+    it("its check http 200 status", function (done) {
         var jsonData = readfile()
         chai.request(server)
         .post('/isTrashed')
         .send(jsonData.isTrashed)
-        .then((res) => {
-            console.log("$$$$$$$$$$$$$$",res.body)
-         expect(res).to.have.status(200);
-         expect(res.body.data.trash).to.be.equal(true)
-        expect(res.body.data.archive).to.be.equal(true)
-         done()
-        }).catch(err => {
-            console.log(err.message);
-        })
-    })
-
+        .set('_id',jsonData.isTrashed._id)
+        .end((err, res) => {     
+            expect(res).to.have.status(200);
+        done()
+      })
+      })
+      it("its check http 422 error status", function (done) {
+        var jsonData = readfile()
+        chai.request(server)
+        .post('/isTrashed')
+        .send(jsonData.isTrashed2)
+        .set('_id',jsonData.isTrashed._id)
+        .end((err, res) => {     
+            expect(res).to.have.status(422);
+        done()
+      })
+      })
+      it("its check http 404 error status", function (done) {
+        var jsonData = readfile()
+        chai.request(server)
+        .post('/isTrashed')
+        .send(jsonData.isTrashed3)
+        .set('_id',jsonData.isTrashed._id)
+        .end((err, res) => {     
+            expect(res).to.have.status(404);
+        done()
+      })
+      })
 })

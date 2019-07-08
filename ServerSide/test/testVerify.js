@@ -36,17 +36,9 @@ function readfile() {
 describe("test status of login api", function () {
   it("Should return 200 and confirmation for valid input", function (done) {
     var jsonData = readfile()
-    chai.request(server).post('/emailverification').send(jsonData.verify).then((res) => {
+    chai.request(server).post('/verification/:token').send(jsonData.verify).set('_id',jsonData.verify._id).end((err, res) => {     
       expect(res).to.have.status(200);
-      expect(res.body.firstname).to.be.equal("dyrfthf");
-      expect(res.body.lastname).to.be.equal("kugvng");
-
-
-      done();
-    }).catch(err => {
-      console.log(err.message);
-    })
+      done()
   })
-
-
-})
+  })
+  })

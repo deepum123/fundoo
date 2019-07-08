@@ -31,8 +31,10 @@ app.use(validators())
 
 var userRouter = require('./router/userRouter')
 var noteRouter=require('./router/noteRouter')
+var labelRouter=require('./router/labelRouter')
 app.use('/', userRouter)
 app.use('/',noteRouter)
+app.use('/',labelRouter)
 //app.get('/', function (req, res) {    
 // res.send('Hello World ,how are you..?????')
 //})

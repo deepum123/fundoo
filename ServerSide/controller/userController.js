@@ -9,7 +9,7 @@
  * 
  *************************************************************************************/
 
-const services=require('../services/Internal/userServices')
+const services = require('../services/Internal/userServices')
 const tokenGenn = require('../services/vendors/tokenGen')
 const sendMailer = require('../services/vendors/sendMailer')
 const redisSet = require('../services/vendors/redisSet')
@@ -23,13 +23,13 @@ const redisSet = require('../services/vendors/redisSet')
  */
 module.exports.userControllerRegister = (req, res) => {
     try {
-      var data={
-            firstname:req.body.firstname,
-            lastname:req.body.lastname,
-            email:req.body.email,
-            password:req.body.password
+        var data = {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            password: req.body.password
 
-      }
+        }
         //Express-validator is a middleware for Express on Node.js that can help you validate user input.
 
         req.checkBody('firstname', 'first name is not valid').isAlpha().isLength({ min: 3 })
@@ -44,32 +44,32 @@ module.exports.userControllerRegister = (req, res) => {
             response.error = errors
             return res.status(422).send(response)
         } else {
-           
-           
+
+
             services.userServiceRegister(data, (err, data) => {
                 if (err) {
                     console.log(err + "error in userController callback block")
-                    return res.status(500).send(err)
+                    return res.status(404).send(err)
                 } else {
-                    console.log("55555",data.id)
-                   const payload = { id: data.id}
+                    console.log("55555", data.id)
+                    const payload = { id: data.id }
                     //  A token is passed for authentication. It supports the stateless API calls.
                     const token = tokenGenn.tokenGen(payload)
-                  //  console.log("111", token.token
-                   redisSet.redisset(payload, token)
-                  
-                    const url = process.env.verfEmail+token.token
-                    subject="email verification link"
-                    sendMailer.sendMailer(url,subject)
-                             return res.status(200).send({
-                                  success:true,
-                                  message: "user registration succesfully completed",
-                                  token:token.token,
-                                  data:data
-                            })
-                        }
+                    //  console.log("111", token.token
+                    redisSet.redisset(payload, token)
+
+                    const url = process.env.verfEmail + token.token
+                    var subject = "email verification link"
+                    sendMailer.sendMailer(url, subject)
+                    return res.status(200).send({
+                        success: true,
+                        message: "user registration succesfully completed",
+                        token: token.token,
+                        data: data
                     })
                 }
+            })
+        }
     } catch (err) {
         console.log("error in user controller register ", err)
         res.send(err)
@@ -83,12 +83,12 @@ module.exports.userControllerRegister = (req, res) => {
 
 module.exports.userControllerLogin = (req, res) => {
     try {
-        var data={
-          
-            email:req.body.email,
-            password:req.body.password
+        var data = {
 
-      }
+            email: req.body.email,
+            password: req.body.password
+
+        }
         //Express-validator is a middleware for Express on Node.js that can help you validate user input.
         req.checkBody('email', 'email is not validate validate by express validator').isEmail()
         req.checkBody('password', 'password is not valid validate by express validators').isLength({ min: 5 })
@@ -104,18 +104,20 @@ module.exports.userControllerLogin = (req, res) => {
                 console.log("emailofbody" + req.body.email)
                 if (err) {
                     console.log(err)
-                    return res.status(500).send(err)
+                    return res.status(404).send(err)
                 } else {
                     console.log("emailofbody" + req.body.email)
-                    const payload = { id: data.id}
+                    console.log("data", data[0].id)
+                    const payload = { id: data[0].id }
                     //  A token is passed for authentication. It supports the stateless API calls.
                     const token = tokenGenn.tokenGen(payload)
+
                     redisSet.redisset(payload, token)
-                  return res.status(200).send({
-                        success:true,
+                    return res.status(200).send({
+                        success: true,
                         message: "user is successfully login",
                         token: token.token,
-                        data,data
+                        data: data
                     })
                 }
             })
@@ -135,9 +137,9 @@ module.exports.userControllerLogin = (req, res) => {
 module.exports.userControllerForgotPassword = (req, res) => {
     try {
 
-        var data={  
-            email:req.body.email
-      }
+        var data = {
+            email: req.body.email
+        }
         //Express-validator is a middleware for Express on Node.js that can help you validate user input
         req.checkBody('email', 'email is not valid').isEmail()
         var errors = req.validationErrors();
@@ -147,33 +149,33 @@ module.exports.userControllerForgotPassword = (req, res) => {
             response.error = errors
             return res.status(422).send(response)
         } else {
-           
-           
+
+
             services.userServiceForgotPassword(data, (err, data) => {
                 if (err) {
                     console.log(err + "error in userController callback block")
-                    return res.status(500).send(err)
+                    return res.status(404).send(err)
                 } else {
-                    console.log("55555",data[0]._id)
-                   const payload = { id: data[0].id}
-                 
+                    console.log("55555", data[0]._id)
+                    const payload = { id: data[0].id }
+
                     //  A token is passed for authentication. It supports the stateless API calls.
                     const token = tokenGenn.tokenGen(payload)
-                  //  console.log("111", token.token
-                   redisSet.redisset(payload, token)
-                   
-                    const url = process.env.resetlink+token.token
-                    subject="resetPassword link"
-                    sendMailer.sendMailer(url,subject)
-                             return res.status(200).send({
-                                  success:true,
-                                  message: "user forgot password succefully link sent to user mail id",
-                                  token:token.token,
-                                  data:data
-                            })
-                        }
+                    //  console.log("111", token.token
+                    redisSet.redisset(payload, token)
+
+                    const url = process.env.resetlink + token.token
+                    var subject = "resetPassword link"
+                    sendMailer.sendMailer(url, subject)
+                    return res.status(200).send({
+                        success: true,
+                        message: "user forgot password succefully link sent to user mail id",
+                        token: token.token,
+                        data: data
                     })
                 }
+            })
+        }
     } catch (err) {
         console.log("error in user controller forgot password block ", err)
         res.send(err)
@@ -187,10 +189,10 @@ module.exports.userControllerForgotPassword = (req, res) => {
 */
 module.exports.userControllerResetPassword = (req, res) => {
     try {
-        var data={  
-            password:req.body.password,
-            userId:req.id
-      }
+        var data = {
+            password: req.body.password,
+            userId: req.id
+        }
         req.checkBody('password', 'password is not valid').isLength({ min: 5 })
         const errors = req.validationErrors();
         const response = {
@@ -200,15 +202,15 @@ module.exports.userControllerResetPassword = (req, res) => {
         if (errors) {
             res.status(422).send(response)
         } else {
-           
+
             services.userServiceResetPassword(data, (err, data) => {
                 if (err) {
-                    res.status(500).send(err)
+                    res.status(404).send(err)
                 } else {
                     res.status(200).send({
-                        success:true,
-                        message:"resetpassword is successufull ",
-                        data:data
+                        success: true,
+                        message: "resetpassword is successufull ",
+                        data: data
                     }
                     )
                 }
@@ -229,17 +231,17 @@ module.exports.userControllerResetPassword = (req, res) => {
 module.exports.userControllerVerification = (req, res) => {
     try {
 
-        var data={
-            userId:req.id
+        var data = {
+            userId: req.id
         }
         services.userServiceVerification(data, (err, data) => {
             if (err) {
-                res.status(500).send(err)
+                res.status(404).send(err)
             } else {
                 res.status(200).send({
-                    success:true,
-                    message:"email verification is successfully done",
-                    data:data
+                    success: true,
+                    message: "email verification is successfully done",
+                    data: data
                 })
             }
         })
@@ -257,30 +259,30 @@ module.exports.userControllerVerification = (req, res) => {
 *@param       : res (response from server)
 */
 module.exports.userControllerUploadImage = (req, res) => {
-    try{
+    try {
 
-    console.log("\npic location --------<", req.file.location);
-    var data={  
-         address:req.file.location, 
-        userId:req.id
-  }
-    services.userServicesUploadImage(data, (err, data) => {
-        if (err) {
-            console.log(err);
-            return res.status(500).send({
-                message: err
-            })
-        } else {
-            console.log("message is coming here", data)
-            return res.status(200).send({
-                success:true,
-                message: "s3 api successfully completed",
-                data:data
-            });
+        console.log("\npic location --------<", req.file.location);
+        var data = {
+            address: req.file.location,
+            userId: req.id
         }
+        services.userServicesUploadImage(data, (err, data) => {
+            if (err) {
+                console.log(err);
+                return res.status(404).send({
+                    message: err
+                })
+            } else {
+                console.log("message is coming here", data)
+                return res.status(200).send({
+                    success: true,
+                    message: "s3 api successfully completed",
+                    data: data
+                });
+            }
 
-    })
- }catch(err){
+        })
+    } catch (err) {
         res.send(err)
     }
 }

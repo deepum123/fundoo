@@ -1,7 +1,7 @@
 /************************************************************************************
  * @purpose   : Controller will contain method for all CRUD operations.
  *
- * @file      : user.controller.js
+ * @file      : updateColor.js
  * @overview  : Methods for all CRUD operation of user.
  * @author    : Deepu M
  * @version   : npm 3.5.2
@@ -32,20 +32,38 @@ function readfile() {
 * @description: test for user register
 ****************************************************************************************/
 describe("test status of register api", function () {
-    it("Should return 200 and confirmation for valid input", function (done) {
+    it("its check http 200 status", function (done) {
         var jsonData = readfile()
         chai.request(server)
         .post('/updateColor')
         .send(jsonData.updateColor)
-        .then((res) => {
-            console.log("$$$$$$$$$$$$$$",res.body)
-         expect(res).to.have.status(200);
-         expect(res.body.data.color).to.be.equal("blue")
-         expect(res.body.data.color).to.be.equal("red")
-         done()
-        }).catch(err => {
-            console.log(err.message);
-        })
-    })
+        .set('_id',jsonData.updateColor._id)
+        .end((err, res) => {     
+            expect(res).to.have.status(200);
+        done()
+      })
+      })
+      it("its check http 422 error status", function (done) {
+        var jsonData = readfile()
+        chai.request(server)
+        .post('/updateColor')
+        .send(jsonData.updateColor2)
+        .set('_id',jsonData.updateColor._id)
+        .end((err, res) => {     
+            expect(res).to.have.status(422);
+        done()
+      })
+      })
+      it("its check http 404 error status", function (done) {
+        var jsonData = readfile()
+        chai.request(server)
+        .post('/updateColor')
+        .send(jsonData.updateColor3)
+        .set('_id',jsonData.updateColor._id)
+        .end((err, res) => {     
+            expect(res).to.have.status(404);
+        done()
+      })
+      })
 
 })

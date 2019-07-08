@@ -32,20 +32,40 @@ function readfile() {
 * @description: test for isPinnedTest
 ****************************************************************************************/
 describe("test status of isPinnedTest api", function () {
-    it("Should return 200 and confirmation for valid input", function (done) {
+    it("its check http 200 status", function (done) {
         var jsonData = readfile()
         chai.request(server)
         .post('/isPinned')
         .send(jsonData.isPinned)
-        .then((res) => {
-            console.log("$$$$$$$$$$$$$$",res.body)
-         expect(res).to.have.status(200);
-         expect(res.body.data.pinned).to.be.equal(true)
-         expect(res.body.data.trash).to.be.equal(true)
-         done()
-        }).catch(err => {
-            console.log(err.message);
-        })
-    })
-
+        .set('_id',jsonData.isPinned._id)
+        .end((err, res) => {     
+            expect(res).to.have.status(200);
+        done()
+      })
+      })
+      
+      it("its check http 422 error status", function (done) {
+        var jsonData = readfile()
+        chai.request(server)
+        .post('/isPinned')
+        .send(jsonData.isPinned2)
+        .set('_id',jsonData.isPinned._id)
+        .end((err, res) => {     
+            expect(res).to.have.status(422);
+        done()
+      })
+      })
+      it("its check http 404 error status", function (done) {
+        var jsonData = readfile()
+        chai.request(server)
+        .post('/isPinned')
+        .send(jsonData.isPinned3)
+        .set('_id',jsonData.isPinned._id)
+        .end((err, res) => {     
+            expect(res).to.have.status(404);
+        done()
+      })
+      })
+      
+      
 })

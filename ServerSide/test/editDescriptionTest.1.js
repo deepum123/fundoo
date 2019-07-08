@@ -32,20 +32,37 @@ function readfile() {
 * @description: test for editDescription
 ****************************************************************************************/
 describe("test status of editDescription api", function () {
-    it("Should return 200 and confirmation for valid input", function (done) {
+    it("its check http 200  status", function (done) {
         var jsonData = readfile()
         chai.request(server)
         .post('/editDescription')
         .send(jsonData.editDescription)
-        .then((res) => {
-            console.log("$$$$$$$$$$$$$$",res.body)
-         expect(res).to.have.status(200);
-         expect(res.body.data.description).to.be.equal("bridge labz")
-        expect(res.body.data.description).to.be.equal("hii h")
-         done()
-        }).catch(err => {
-            console.log(err.message);
-        })
-    })
-
+        .set('_id',jsonData.editDescription._id)
+        .end((err, res) => {     
+            expect(res).to.have.status(200);
+        done()
+      })
+      })
+      it("its check http 422 error status", function (done) {
+        var jsonData = readfile()
+        chai.request(server)
+        .post('/editDescription')
+        .send(jsonData.editDescription2)
+        .set('_id',jsonData.editDescription._id)
+        .end((err, res) => {     
+            expect(res).to.have.status(422);
+        done()
+      })
+      })
+      it("its check http 404 error status", function (done) {
+        var jsonData = readfile()
+        chai.request(server)
+        .post('/editDescription')
+        .send(jsonData.editDescription3)
+        .set('_id',jsonData.editDescription._id)
+        .end((err, res) => {     
+            expect(res).to.have.status(404);
+        done()
+      })
+      })
 })

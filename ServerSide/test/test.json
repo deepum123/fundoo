@@ -1,33 +1,97 @@
 {
     "register":{
-        "firstname":"deepum",
-        "lastname":"kumar",
-        "email":"deepums436684@gmail.com",
-        "password":"1234567899"
+        "firstname":"deespum",
+        "lastname":"kumsar",
+        "email":"deepwwwdwdsdwcdswdswexw7784@gmail.com",
+        "password":"12345s67899"
+
+    },
+    "register2":{
+        "firstname":"de",
+        "lastname":"kumsar",
+        "email":"deepwwwdwdswcdswdesxw7784@gmail.com",
+        "password":"12345s67899"
+
+    },
+    "register3":{
+        "firstname":"deespum",
+        "lastname":"kumsar",
+        "email":"deepwwwdwdswcdswdsexw7784@gmail.com",
+        "password":"12345s67899"
 
     },
     "login":{
-        "email":"deepum23@gmail.com",
-        "password":"1234567899"
+        "_id": "5d22d1f279d575229d3c545d",
+         "email":"raj123@gmail.com",
+         "password":"12345s67899"
+        
+    },
+    "login2":{
+        "_id": "5d22d1f279d575229d3c545d",
+         "email":"raj123@gmail.com",
+         "password":"1"
+        
+    },
+    "login3":{
+        "_id": "5d22d1f279d575229d3c545d",
+         "email":"rajss123@gmail.com",
+         "password":"12345s67899"
         
     },
     "forgotpassword":{
-        "email":"deepum23@gmail.com"
+          
+        "_id": "5d22d1f279d575229d3c545d",
+         "email":"raj123@gmail.com",
+         "password":"12345s67899"
+       
     },
-    "resetpassword":
-  
-    {
-        "password":"123qweasdzxc"
+    "forgotpassword2":{
+          
+        "_id": "5d22d1f279d575229d3c545d",
+         "email":"raj123gmail.com"
+       
+    },
+    "forgotpassword3":{
+          
+        "_id": "5d22d1f279d575229d3c545d",
+         "email":"raj12wer3@gmail.com"
+       
+    },
+    "resetpassword":{
+        "_id": "5d22d1f279d575229d3c545d",
+        "email":"raj12wer3@gmail.com",
+        "password":"123456787"
+          
+    },
+    "resetpassword2":{
+        "_id": "5d22d1f279d575229d3c545d",
+        "email":"raj12wer3@gmail.com",
+        "password":"1"
+          
     },
     "shorturl":{
         "urlCode":"vckp9cMz_"
     },
     "verify":{
-        "email":"racdde3457@gmail.com"
+        "_id": "5d22d1f279d575229d3c545d",
+        "email":"raj123@gmail.com"
     },
    
     "createNote":{
         "_id": "5d15d9d7860258428a513cef",
+        "title": "first note",
+        "description": "hello",
+        "color": "grey"
+    },
+    "createNote2":{
+        "_id": "5d15d9d7860258428a513cef",
+        "title": "",
+        "description": "hello",
+        "color": "grey"
+       
+    },
+    "createNote3":{
+        "_id": "5d2303eb934a0c7d2ecb4835",
         "title": "first note",
         "description": "hello",
         "color": "grey"
@@ -38,8 +102,32 @@
         "archive":"true"
 
     },
+    "isArchive2":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "archive":""
+
+    },
+    "isArchive3":{
+        "noteid": "56565",
+        "_id":  "5d15d9d7860258428a513cef",
+        "archive":"true"
+
+    },
     "isTrashed":{
         "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "trash":"true"
+
+    },
+    "isTrashed2":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "trash":""
+
+    }, 
+    "isTrashed3":{
+        "noteid": "5d19ac354ty7e7cd450bc2b854",
         "_id":  "5d15d9d7860258428a513cef",
         "trash":"true"
 
@@ -49,13 +137,52 @@
         "_id":  "5d15d9d7860258428a513cef",
         "pinned":"true"
     },
+    "isPinned2":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "pinned":""
+    },
+    "isPinned3":{
+        "noteid": "5d19ac3yt547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "pinned":"true"
+    },
+    "getAllNotes":{
+        "_id":  "5d15d9d7860258428a513cef",
+        "page":"2"
+    },
+    "getAllNotes2":{
+        "_id":  "5d15d9d7860258428a513cef",
+        "page":""
+    },
     "editTitle":{
         "noteid": "5d19ac3547e7cd450bc2b854",
         "_id":  "5d15d9d7860258428a513cef",
         "newtitle":"hii helloo"
     },
+    "editTitle2":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "newtitle":""
+    },
+    "editTitle3":{
+        "noteid": "5d19ac3547e7sscd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "newtitle":"hii helloo"
+    },
     "editDescription":{
         "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "description":"bridge labz"
+
+    }, "editDescription2":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "description":""
+
+    },
+    "editDescription3":{
+        "noteid": "5d19ac3547ess7cd450bc2b854",
         "_id":  "5d15d9d7860258428a513cef",
         "description":"bridge labz"
 
@@ -66,10 +193,50 @@
         "color":"blue"
 
     },
+    "updateColor2":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "color":""
+
+    },
+    "updateColor3":{
+        "noteid": "5d19ac354hjukh7e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "color":"blue"
+
+    },
+    "deleteNote":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef"
+
+    },
+    "deleteNote2":{
+        "noteid": "",
+        "_id":  "5d15d9d7860258428a513cef"
+   
+
+    },
+    "deleteNote3":{
+        "noteid": "5d19ac354hh7e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef"
+       
+
+    },
+    
     "remainder":{
         "noteid": "5d19ac3547e7cd450bc2b854",
         "_id":  "5d15d9d7860258428a513cef",
         "remainder":"2 o clock"
+    },
+    "remainder2":{
+        "noteid": "5d19ac3547e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "remainder":""
+    },
+    "remainder3":{
+        "noteid": "5d19ac35gfhgf47e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "remainder":"fgh"
     },
     "search":{
         "noteid": "5d19ac3547e7cd450bc2b854",
@@ -77,10 +244,91 @@
         "color":"blue"
 
     } ,
-    "getAllNotes":{
+    "search2":{
         "noteid": "5d19ac3547e7cd450bc2b854",
-        "_id":  "5d15d9d7860258428a513cef"
-        
+        "_id":  "5d15d9d7860258428a513cef",
+        "color":""
 
-    } 
+    } ,
+    "search3":{
+        "noteid": "5d19ac354gywhkjgy7e7cd450bc2b854",
+        "_id":  "5d15d9d7860258428a513cef",
+        "color":"ghkjghkj"
+
+    } ,
+    "createlabel":{
+          "_id":"5d1c40a6b664e832cb6cbb8f",
+          "label":"rajjjjjjj"
+    },
+    "createlabel2":{
+        "_id":"5d1c40a6b664e832cb6cbb8f",
+        "label":""
+  },
+  "createlabel3":{
+    "_id": "5d2303eb934a0c7d2ecb4835",
+    "label":"deaf"
+},
+  "getlabels":{
+    "_id":"5d1c40a6b664e832cb6cbb8f"
+  },
+  "getlabels2":{
+    "_id": "5d2303eb934a0c7d2ecb4835"
+  },
+  "deletelabel":{
+    "_id":"5d1c40a6b664e832cb6cbb8f",
+    "labelid": "5d20453d96b615597e64fede"
+  },
+  "deletelabel2":{
+    "_id":"5d1c40a6b664e832cb6cbb8f",
+    "labelid": ""
+  },
+  "deletelabel3":{
+    "_id":"5d1c40a6b664e832cb6cbb8f",
+    "labelid": "5d20453fghftgd96b615597e64fede"
+  },
+  "editLabelName":{
+    "_id":"5d1c40a6b664e832cb6cbb8f",
+    "labelid": "5d1f380c7735a564a8cc6bf4",
+    "label":"helooo"
+  },
+  "editLabelName2":{
+    "_id":"5d1c40a6b664e832cb6cbb8f",
+    "labelid": "5d1f380c7735a564a8cc6bf4",
+    "label":""
+  },
+  "editLabelName3":{
+    "_id":"5d1c40a6b6s64e832cb6cbb8f",
+    "labelid": "5d1f380c7sdf735a564a8cc6bf4",
+    "label":"helooo"
+  },
+  "addNoteToLabel":{
+    "_id":"5d1c40a6b664e832cb6cbb8f",
+    "labelid": "5d1f380c7735a564a8cc6bf4",
+    "noteid":"5d15da10860258428a513cf2"
+  },
+  "addNoteToLabel2":{
+    "_id":"5d1c40a6b664e832cb6cbb8f",
+    "labelid": "5d1f380cgfgd7735a564a8cc6bf4",
+    "noteid":"5d15da108602dfg58428a513cf2"
+  },
+  "addNoteToLabel3":{
+    "_id":"5d1c40a6b664e832cb6cbb8f",
+    "labelid": "",
+    "noteid":""
+  },
+  "deleteNotefromLabel":{
+    "_id":"5d1c40a6b664e832cb6cbb8f",
+    "labelid": "5d20302712251c345508fd91",
+    "noteid":"5d15d9f5860258428a513cf0"
+  },
+  "deleteNotefromLabel2":{
+    "_id":"5d1c40a6b664e832cb6cbb8f",
+    "labelid": "5d203027122ds51c345508fd91",
+    "noteid":"5d15d9f58602sdcf58428a513cf0"
+  },
+  "deleteNotefromLabel3":{
+    "_id":"5d1c40a6b664e832cb6cbb8f",
+    "labelid": "",
+    "noteid":""
+  }
 }

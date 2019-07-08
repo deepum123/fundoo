@@ -37,6 +37,7 @@ describe("test status of get all notes api", function () {
         chai.request(server)
         .post('/getAllNotes')
         .send(jsonData.getAllNotes)
+        .set('_id',jsonData.getAllNotes._id)
         .then((res) => {
             console.log("$$$$$$$$$$$$$$",res.body)
          expect(res).to.have.status(200);

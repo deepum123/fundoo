@@ -23,29 +23,47 @@ var fs = require("fs")
 ***************************************************************************************/
 
 function readfile() {
-    var readdata = fs.readFileSync('/home/admin1/Desktop/fundoo/ServerSide/test/test.json')
-    var data = JSON.parse(readdata)
-    return data
+  var readdata = fs.readFileSync('/home/admin1/Desktop/fundoo/ServerSide/test/test.json')
+  var data = JSON.parse(readdata)
+  return data
 }
 
 /***************************************************************************************
 * @description: test for remainder
 ****************************************************************************************/
 describe("test status of remainder api", function () {
-    it("Should return 200 and confirmation for valid input", function (done) {
-        var jsonData = readfile()
-        chai.request(server)
-        .post('/remainder')
-        .send(jsonData.remainder)
-        .then((res) => {
-            console.log("$$$$$$$$$$$$$$",res.body)
-         expect(res).to.have.status(200);
-         expect(res.body.data.remainder).to.be.equal("2 o clock")
-         expect(res.body.data.remainder).to.be.equal("1 o clock")
-         done()
-        }).catch(err => {
-            console.log(err.message);
-        })
-    })
+  it("its check http 200 status", function (done) {
+    var jsonData = readfile()
+    chai.request(server)
+      .post('/remainder')
+      .send(jsonData.remainder)
+      .set('_id', jsonData.remainder._id)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done()
+      })
+  })
+  it("its check http 422 error status", function (done) {
+    var jsonData = readfile()
+    chai.request(server)
+      .post('/remainder')
+      .send(jsonData.remainder2)
+      .set('_id', jsonData.remainder._id)
+      .end((err, res) => {
+        expect(res).to.have.status(422);
+        done()
+      })
+  })
+  it("its check http 404 error status", function (done) {
+    var jsonData = readfile()
+    chai.request(server)
+      .post('/remainder')
+      .send(jsonData.remainder3)
+      .set('_id', jsonData.remainder._id)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        done()
+      })
+  })
 
 })

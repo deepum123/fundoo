@@ -1,7 +1,7 @@
 /************************************************************************************
  * @purpose   : Controller will contain method for all CRUD operations.
  *
- * @file      : user.controller.js
+ * @file      : LoginTest.js
  * @overview  : Methods for all CRUD operation of user.
  * @author    : Deepu M
  * @version   : npm 3.5.2
@@ -34,18 +34,25 @@ function readfile(){
    ************************************************************************************/
 
 describe("test status of login api",function(){
-    it("Should return 200 and confirmation for valid input",function(done){
+    it("its check http 200 status",function(done){
         var jsonData=readfile()
-        chai.request(server).post('/login').send(jsonData.login).then((res) => { 
-            expect(res).to.have.status(200);  
-            expect(res.body.message[0].firstname).to.be.equal("deepum");
-            expect(res.body.message[0].lastname).to.be.equal("kumar");
- 
-            done();
-          }).catch(err => {
-            console.log(err.message);
-          })
+        chai.request(server).post('/login').send(jsonData.login).set('_id',jsonData.login._id).end((err, res) => {     
+          expect(res).to.have.status(200);
+      done()
+    })
+    })
+    it("its check http 422 error status",function(done){
+      var jsonData=readfile()
+      chai.request(server).post('/login').send(jsonData.login2).set('_id',jsonData.login._id).end((err, res) => {     
+        expect(res).to.have.status(422);
+    done()
+  })
+  })
+  it("its check http 404 error status",function(done){
+    var jsonData=readfile()
+    chai.request(server).post('/login').send(jsonData.login3).set('_id',jsonData.login._id).end((err, res) => {     
+      expect(res).to.have.status(404);
+  done()
 })
-
-
 })
+   })

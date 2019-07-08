@@ -35,18 +35,32 @@ describe("test status of createNote api", function () {
     it("Should return 200 and confirmation for valid input", function (done) {
         var jsonData = readfile()
         chai.request(server)
-        .post('/createNote')
-        .send(jsonData.createNote)
-        .then((res) => {
-         expect(res).to.have.status(200);
-         expect(res.body.data.title).to.be.equal("first note");
-         expect(res.body.data.color).to.be.equal("grey");
-         expect(res.body.data.description).to.be.equal("hello")
-         expect(res.body.data.pinned).to.be.equal("true")
-         done()
-        }).catch(err => {
-            console.log(err.message);
-        })
+            .post('/createNote')
+            .send(jsonData.createNote)
+            .set('_id', jsonData.login._id).end((err, res) => {
+                expect(res).to.have.status(200);
+                done()
+            })
+    })
+    it("its check http 422 error status", function (done) {
+        var jsonData = readfile()
+        chai.request(server)
+            .post('/createNote')
+            .send(jsonData.createNote2)
+            .set('_id', jsonData.login._id).end((err, res) => {
+                expect(res).to.have.status(422);
+                done()
+            })
+    })
+    it("its check http 200 status", function (done) {
+        var jsonData = readfile()
+        chai.request(server)
+            .post('/createNote')
+            .send(jsonData.createNote3)
+            .set('_id', jsonData.login._id).end((err, res) => {
+                expect(res).to.have.status(200);
+                done()
+            })
     })
 
 })

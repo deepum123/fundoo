@@ -23,29 +23,47 @@ var fs = require("fs")
 ***************************************************************************************/
 
 function readfile() {
-    var readdata = fs.readFileSync('/home/admin1/Desktop/fundoo/ServerSide/test/test.json')
-    var data = JSON.parse(readdata)
-    return data
+  var readdata = fs.readFileSync('/home/admin1/Desktop/fundoo/ServerSide/test/test.json')
+  var data = JSON.parse(readdata)
+  return data
 }
 
 /***************************************************************************************
 * @description: test for edit Title of note
 ****************************************************************************************/
 describe("test status of editTitle api", function () {
-    it("Should return 200 and confirmation for valid input", function (done) {
-        var jsonData = readfile()
-        chai.request(server)
-        .post('/editTitle')
-        .send(jsonData.editTitle)
-        .then((res) => {
-            console.log("$$$$$$$$$$$$$$",res.body)
-         expect(res).to.have.status(200);
-         expect(res.body.data.title).to.be.equal("hii helloo")
-         expect(res.body.data.title).to.be.equal("hii h")
-         done()
-        }).catch(err => {
-            console.log(err.message);
-        })
-    })
+  it("its check http 200 status", function (done) {
+    var jsonData = readfile()
+    chai.request(server)
+      .post('/editTitle')
+      .send(jsonData.editTitle)
+      .set('_id', jsonData.editTitle._id)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done()
+      })
+  })
+  it("its check http 422 error status", function (done) {
+    var jsonData = readfile()
+    chai.request(server)
+      .post('/editTitle')
+      .send(jsonData.editTitle2)
+      .set('_id', jsonData.editTitle._id)
+      .end((err, res) => {
+        expect(res).to.have.status(422);
+        done()
+      })
+  })
+  it("its check http 400 error status", function (done) {
+    var jsonData = readfile()
+    chai.request(server)
+      .post('/editTitle')
+      .send(jsonData.editTitle3)
+      .set('_id', jsonData.editTitle._id)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        done()
+      })
+  })
 
 })

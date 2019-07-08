@@ -23,29 +23,46 @@ var fs = require("fs")
 ***************************************************************************************/
 
 function readfile() {
-    var readdata = fs.readFileSync('/home/admin1/Desktop/fundoo/ServerSide/test/test.json')
-    var data = JSON.parse(readdata)
-    return data
+  var readdata = fs.readFileSync('/home/admin1/Desktop/fundoo/ServerSide/test/test.json')
+  var data = JSON.parse(readdata)
+  return data
 }
 
 /***************************************************************************************
 * @description: test for search api
 ****************************************************************************************/
 describe("test status of search api", function () {
-    it("Should return 200 and confirmation for valid input", function (done) {
-        var jsonData = readfile()
-        chai.request(server)
-        .post('/search')
-        .send(jsonData.search)
-        .then((res) => {
-            console.log("$$$$$$$$$$$$$$",res.body)
-         expect(res).to.have.status(200);
-         expect(res.body.data[0].color).to.be.equal("blue")
-        expect(res.body.data[0].color).to.be.equal("red")
-         done()
-        }).catch(err => {
-            console.log(err.message);
-        })
-    })
-
+  it("its check http 200 status", function (done) {
+    var jsonData = readfile()
+    chai.request(server)
+      .post('/search')
+      .send(jsonData.search)
+      .set('_id', jsonData.search._id)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done()
+      })
+  })
+  it("its check http 200 status", function (done) {
+    var jsonData = readfile()
+    chai.request(server)
+      .post('/search')
+      .send(jsonData.search2)
+      .set('_id', jsonData.search._id)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done()
+      })
+  })
+  it("its check http 404 error status", function (done) {
+    var jsonData = readfile()
+    chai.request(server)
+      .post('/search')
+      .send(jsonData.search3)
+      .set('_id', jsonData.search._id)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        done()
+      })
+  })
 })

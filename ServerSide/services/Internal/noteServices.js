@@ -82,10 +82,7 @@ class noteServices {
 
             }
         })
-
-
     }
-
 
     /**************************************************************************** 
     *@description : To send   data about isPinned api to models and callback the return data to controller
@@ -256,11 +253,6 @@ class noteServices {
             }
         })
     }
-
-
-
-
-
 }
 
 const noteServicesOBj = new noteServices()

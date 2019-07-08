@@ -23,29 +23,46 @@ var fs = require("fs")
 ***************************************************************************************/
 
 function readfile() {
-    var readdata = fs.readFileSync('/home/admin1/Desktop/fundoo/ServerSide/test/test.json')
-    var data = JSON.parse(readdata)
-    return data
+  var readdata = fs.readFileSync('/home/admin1/Desktop/fundoo/ServerSide/test/test.json')
+  var data = JSON.parse(readdata)
+  return data
 }
 
 /***************************************************************************************
 * @description: test for isArchiveTest
 ****************************************************************************************/
 describe("test status of isArchive api", function () {
-    it("Should return 200 and confirmation for valid input", function (done) {
-        var jsonData = readfile()
-        chai.request(server)
-        .post('/isArchive')
-        .send(jsonData.isArchive)
-        .then((res) => {
-            console.log("$$$$$$$$$$$$$$",res.body)
-         expect(res).to.have.status(200);
-         expect(res.body.data.archive).to.be.equal(true)
-         expect(res.body.data.trash).to.be.equal(true)
-         done()
-        }).catch(err => {
-            console.log(err.message);
-        })
-    })
-
+  it("its check http 200 status", function (done) {
+    var jsonData = readfile()
+    chai.request(server)
+      .post('/isArchive')
+      .send(jsonData.isArchive)
+      .set('_id', jsonData.isArchive._id)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done()
+      })
+  })
+  it("its check http 422 error status", function (done) {
+    var jsonData = readfile()
+    chai.request(server)
+      .post('/isArchive')
+      .send(jsonData.isArchive2)
+      .set('_id', jsonData.isArchive._id)
+      .end((err, res) => {
+        expect(res).to.have.status(422);
+        done()
+      })
+  })
+  it("its check http 404 error status", function (done) {
+    var jsonData = readfile()
+    chai.request(server)
+      .post('/isArchive')
+      .send(jsonData.isArchive3)
+      .set('_id', jsonData.isArchive._id)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        done()
+      })
+  })
 })
