@@ -17,6 +17,6 @@ router.post('/updateColor',auth.auth,noteController.noteControllerUpdateColor)
 router.post('/search',auth.auth,noteController.noteControllerSearch)
 router.post('/remainder',auth.auth,noteController.noteControllerNoteRemainder)
 router.post('/erashTrash',auth.auth,noteController.noteControllerErashTrash)
-router.post('/updateImage',auth.auth,upload.single('image'),noteController.noteControllerUpdateImage)
+router.post('/updateImagee',auth.auth,upload.single('image'),noteController.noteControllerUpdateImage)
 
 module.exports=router

@@ -1,0 +1,65 @@
+<html>
+<div fxLayoutAlign="space-around center" fxFlex="100">
+  <mat-card fxFlex="33" >
+      <mat-card-title  class="fundoo" fxLayout="row" fxLayoutAlign="center center">
+        <span class="f">Fundoo</span>
+      </mat-card-title>
+      <mat-card-title class="title" fxLayout="row" fxLayoutAlign="center center">Log In</mat-card-title>
+
+      <div fxLayout="column" fxLayoutGap="20px"   fxLayoutAlign="space-around center">
+        <mat-form-field appearance="outline" >
+          <mat-label aria-autocomplete="off" >Email id</mat-label>
+          <input matInput placeholder="Enter your email id"  [formControl]="emailFormControl"
+            [errorStateMatcher]="matcher"  />
+            <mat-icon matSuffix>email</mat-icon>
+          <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+          <mat-error *ngIf="
+                emailFormControl.hasError('email') 
+              ">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+     
+        <!-- user password -->
+       
+        <mat-form-field appearance="outline" class="form" >
+          <mat-label aria-autocomplete="off" >Enter your password</mat-label>
+          <input matInput placeholder="Enter your password"  [type]="hide ? 'password' : 'text'"
+          [formControl]="password" autocomplete="off" requried />
+        <mat-icon matSuffix (click)="hide = !hide">{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+            <mat-error *ngIf="
+            password.hasError('minlength')
+          ">
+          min 8 letters required
+            </mat-error>
+            <mat-error *ngIf="password.hasError('required')">
+              password is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+      </div>
+      
+      <div fxLayout="row"    fxLayoutAlign="space-around center">
+        <button mat-button (click)="forgotpassword()"  fxLayoutAlign="center">
+          Retrieve Password?
+        </button>
+ 
+ 
+        <button mat-button (click)="registerPath()"  fxLayoutAlign="center">
+          New User
+        </button>
+        </div>
+        <div fxLayout="row"    fxLayoutAlign="space-around center">
+        <button  mat-button (click)="login()" class='loginButton' fxLayoutAlign="center center" mat-raised-button
+          color="primary" mat-button aria-label="Show an example snack-bar">
+         Login
+        </button>
+        </div>
+  </mat-card>
+</div>
+
+</html>

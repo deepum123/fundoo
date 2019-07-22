@@ -93,24 +93,24 @@ class notemodel {
             description: data.description,
             color: data.color
         })
-         
-        var myPromise = new Promise(function(resolve, reject) { 
-                newNote.save((err, data) => {
-                    if(err){
-                        reject(err)
-                    }else{
-                    resolve(data) 
-                    }
-                })
+
+        var myPromise = new Promise(function (resolve, reject) {
+            newNote.save((err, data) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(data)
+                }
             })
-           myPromise. 
-            then(function (result) { 
-                callback(null,result)
-            }). 
-            catch(function (result) { 
+        })
+        myPromise.
+            then(function (result) {
+                callback(null, result)
+            }).
+            catch(function (result) {
                 callback(result)
             });
-  
+
     }
 
     /*******************************************************************************************************
@@ -135,22 +135,22 @@ class notemodel {
         }
         */
     async deleteNote(data, callback) {
-        var myPromise = new Promise(function(resolve, reject) { 
+        var myPromise = new Promise(function (resolve, reject) {
             note.findOneAndDelete({ "_id": data.noteid }, (err, data) => {
-                if(err){
+                if (err) {
                     reject(err)
-                }else{
-                resolve(data) 
+                } else {
+                    resolve(data)
                 }
             })
         })
-       myPromise. 
-        then(function (result) { 
-            callback(null,result)
-        }). 
-        catch(function (result) { 
-            callback(result) 
-        });
+        myPromise.
+            then(function (result) {
+                callback(null, result)
+            }).
+            catch(function (result) {
+                callback(result)
+            });
 
     }
 
@@ -196,22 +196,25 @@ class notemodel {
       }
       */
     async  getAll(data, callback) {
-        var myPromise = new Promise(function(resolve, reject) { 
-            note.find({ 'userId': data.userId }, (err, data) => {
-                if(err){
-                    reject(err)
-                }else{
-                resolve(data) 
-                }
-            })
+        var myPromise = new Promise(function (resolve, reject) {
+            note.find({ 'userId': data.userId })
+                .skip((perPage * page) - perPage)
+                .limit(perPage)
+                .end((err, data) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(data)
+                    }
+                })
         })
-       myPromise. 
-        then(function (result) { 
-            callback(null,result)   
-        }). 
-        catch(function (result) { 
-            callback(result) 
-        });
+        myPromise.
+            then(function (result) {
+                callback(null, result)
+            }).
+            catch(function (result) {
+                callback(result)
+            });
 
     }
 
@@ -244,22 +247,22 @@ class notemodel {
 
     async Update(data, field, callback) {
 
-        var myPromise = new Promise(function(resolve, reject) { 
+        var myPromise = new Promise(function (resolve, reject) {
             note.findOneAndUpdate({ '_id': data.noteid }, field, (err, data) => {
-                if(err){
+                if (err) {
                     reject(err)
-                }else{
-                resolve(data) 
+                } else {
+                    resolve(data)
                 }
             })
         })
-       myPromise. 
-        then(function (result) { 
-            callback(null,result) 
-        }). 
-        catch(function (result) { 
-            callback(result) 
-        });
+        myPromise.
+            then(function (result) {
+                callback(null, result)
+            }).
+            catch(function (result) {
+                callback(result)
+            });
     }
 
 
@@ -288,22 +291,22 @@ class notemodel {
       }
   */
     async deleteMany(data, field, callback) {
-        var myPromise = new Promise(function(resolve, reject) { 
+        var myPromise = new Promise(function (resolve, reject) {
             note.deleteMany({ $and: [{ 'userId': data.userId }, field] }, (err, data) => {
-                if(err){
+                if (err) {
                     reject(err)
-                }else{
-                resolve(data) 
+                } else {
+                    resolve(data)
                 }
             })
         })
-       myPromise. 
-        then(function (result) { 
-            callback(null,result)
-        }). 
-        catch(function (result) { 
-            callback(result) 
-        });
+        myPromise.
+            then(function (result) {
+                callback(null, result)
+            }).
+            catch(function (result) {
+                callback(result)
+            });
     }
 
 
@@ -334,22 +337,22 @@ class notemodel {
        }
        */
     async  search(data, field, callback) {
-        var myPromise = new Promise(function(resolve, reject) { 
+        var myPromise = new Promise(function (resolve, reject) {
             note.find({ $and: [{ 'userId': data.userId }, field] }, (err, data) => {
-                if(err){
+                if (err) {
                     reject(err)
-                }else{
-                resolve(data) 
+                } else {
+                    resolve(data)
                 }
             })
         })
-       myPromise. 
-        then(function (result) { 
-            callback(null,result)
-        }). 
-        catch(function (result) { 
-            callback(result)
-        });
+        myPromise.
+            then(function (result) {
+                callback(null, result)
+            }).
+            catch(function (result) {
+                callback(result)
+            });
     }
 
 }

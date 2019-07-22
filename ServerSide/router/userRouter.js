@@ -16,12 +16,12 @@ const router=express.Router()
 const upload=require('../services/vendors/s3ApiServices')
 const auth=require('../middleware/authentication')
 
-
-router.post('/register',controller.userControllerRegister)
-router.post('/verification/:token',auth.auth,controller.userControllerVerification)
+router.route('/register').post(controller.userControllerRegister);
+router.route('/verification/:token').get(auth.auth,controller.userControllerVerification)
+//router.post('/verification/:token',auth.auth,controller.userControllerVerification)
 router.post('/login',controller.userControllerLogin)
 router.post('/forgotpassword',controller.userControllerForgotPassword)
-router.post('/resetpassword/:token',auth.auth,controller.userControllerResetPassword)
-
+//router.post('/resetpassword/:token',auth.auth,controller.userControllerResetPassword)
+router.route('/resetpassword/:token').post(auth.auth,controller.userControllerResetPassword)
 router.post('/uploadImage',auth.auth,upload.single('image'),controller.userControllerUploadImage)
 module.exports=router

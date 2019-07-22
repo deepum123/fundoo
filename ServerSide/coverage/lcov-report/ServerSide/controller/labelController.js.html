@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">88.24% </span>
+        <span class="strong">86.55% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>105/119</span>
+        <span class='fraction'>103/119</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">87.5% </span>
+        <span class="strong">83.33% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>21/24</span>
+        <span class='fraction'>20/24</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">91.67% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>12/12</span>
+        <span class='fraction'>11/12</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">88.24% </span>
+        <span class="strong">86.55% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>105/119</span>
+        <span class='fraction'>103/119</span>
       </div>
     </div>
     <p class="quiet">
@@ -425,25 +425,25 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -647,11 +647,11 @@ const logger = require('../services/vendors/logger').logger
 &nbsp;
 /************************************************************************************
  * 
- * @Description : note Controller createLabel function is used to create new label ...
+ * @Description : label Controller createLabel function is used to create new label ...
  * @param : req from client
  * @param : res from server
  ****************************************************************************************/
-module.exports.noteControllerCreateLabel = (req, res) =&gt; {
+module.exports.labelControllerCreateLabel = (req, res) =&gt; {
     try {
         logger.info(" create label req body data ", req.body)
         console.log("req.id", req.id)
@@ -696,11 +696,11 @@ module.exports.noteControllerCreateLabel = (req, res) =&gt; {
 &nbsp;
 /************************************************************************************
  * 
- * @Description : note Controller get labels is used to get all labels  ...
+ * @Description : label Controller get labels is used to get all labels  ...
  * @param : req from client
  * @param : res from server
  ****************************************************************************************/
-module.exports.noteControllerGetLabels = (req, res) =&gt; {
+module.exports.labelControllerGetLabels = (req, res) =&gt; {
     try {
         logger.info("  get notes req body   data ", req.body)
         var data = {
@@ -715,16 +715,16 @@ module.exports.noteControllerGetLabels = (req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >            response.error = errors</span>
 <span class="cstat-no" title="statement not covered" >            return res.status(422).send(response)</span>
         } else {
-            labelService.noteServiceGetLabels(data, (err, data) =&gt; {
-                <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
+            labelService.labelServiceGetLabels(data, <span class="fstat-no" title="function not covered" >(e</span>rr, data) =&gt; {
+<span class="cstat-no" title="statement not covered" >                if (err) {</span>
 <span class="cstat-no" title="statement not covered" >                    logger.error(" label controller get label  ", err)</span>
 <span class="cstat-no" title="statement not covered" >                    res.status(404).send({</span>
                         success: false,
                         message: "error occured in  get label function",
                     })
                 } else {
-                    logger.error(" get label res  data ", data)
-                    res.status(200).send({
+<span class="cstat-no" title="statement not covered" >                    logger.error(" get label res  data ", data)</span>
+<span class="cstat-no" title="statement not covered" >                    res.status(200).send({</span>
                         success: true,
                         message: "successfully get all label ",
                         data: data
@@ -734,16 +734,16 @@ module.exports.noteControllerGetLabels = (req, res) =&gt; {
             })
         }
     } catch (err) {
-<span class="cstat-no" title="statement not covered" >        res.send(err)</span>
+        res.send(err)
     }
 }
 /************************************************************************************
  * 
- * @Description : note Controller delete label is used to delete the label   ...
+ * @Description : label Controller delete label is used to delete the label   ...
  * @param : req from client
  * @param : res from server
  ****************************************************************************************/
-module.exports.noteControllerDeleteLabel = (req, res) =&gt; {
+module.exports.labelControllerDeleteLabel = (req, res) =&gt; {
     try {
         logger.info(" label delete  req body   data ", req.body)
         var data = {
@@ -779,11 +779,11 @@ module.exports.noteControllerDeleteLabel = (req, res) =&gt; {
 }
 /************************************************************************************
  * 
- * @Description : note controller editName function used to edit the name of label ...
+ * @Description : label controller editName function used to edit the name of label ...
  * @param : req from client
  * @param : res from server
  ****************************************************************************************/
-module.exports.noteControllerEditLabelName = (req, res) =&gt; {
+module.exports.labelControllerEditLabelName = (req, res) =&gt; {
     try {
         logger.info(" edit label name req body   data ", req.body)
         console.log("sssssssssssss", req.body)
@@ -827,11 +827,11 @@ module.exports.noteControllerEditLabelName = (req, res) =&gt; {
 }
 /************************************************************************************
  * 
- * @Description : note controller add note to label is used to add note to label ...
+ * @Description : label controller add note to label is used to add note to label ...
  * @param : req from client
  * @param : res from server
  ****************************************************************************************/
-module.exports.noteControllerAddNoteTolabel = (req, res) =&gt; {
+module.exports.labelControllerAddNoteTolabel = (req, res) =&gt; {
     try {
         logger.info(" add note to label req body   data ", req.body)
         console.log("sssssssssssss", req.body)
@@ -875,11 +875,11 @@ module.exports.noteControllerAddNoteTolabel = (req, res) =&gt; {
 &nbsp;
 /************************************************************************************
  * 
- * @Description : note Controller RemoveNoteFromLabel function is used to  remove the note from label ...
+ * @Description : label Controller RemoveNoteFromLabel function is used to  remove the note from label ...
  * @param : req from client
  * @param : res from server
  ****************************************************************************************/
-module.exports.noteControllerRemoveNoteFromLabel = (req, res) =&gt; {
+module.exports.labelControllerRemoveNoteFromLabel = (req, res) =&gt; {
     try {
         logger.info(" Remove Note From Label req body   data ", req.body)
         console.log("sssssssssssss", req.body)
@@ -925,7 +925,7 @@ module.exports.noteControllerRemoveNoteFromLabel = (req, res) =&gt; {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 08 2019 17:54:53 GMT+0530 (IST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Jul 13 2019 12:41:37 GMT+0530 (India Standard Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>

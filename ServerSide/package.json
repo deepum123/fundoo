@@ -1,7 +1,6 @@
 {
   "name": "serverside",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "directories": {
     "test": "test"
@@ -9,7 +8,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "mocha --timeout 60000 ./test/**/*.js --exit || true",
-    "coverage": "./node_modules/.bin/nyc -r cobertura -r text-summary -r lcov npm run test"
+    "coverage": "nyc  -r text-summary -r lcov npm run test"
   },
   "author": "Deepu m",
   "license": "ISC",
@@ -25,6 +24,7 @@
   "dependencies": {
     "aws-s3": "^2.0.5",
     "aws-sdk": "^2.478.0",
+    "multer-s3": "^2.9.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "chai-http": "^4.3.0",
@@ -43,5 +43,6 @@
     "sonarqube-scanner": "2.4.1 ",
     "valid-url": "^1.0.9",
     "winston": "^3.2.1"
-  }
+  },
+  "description": ""
 }

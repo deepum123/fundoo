@@ -17,8 +17,6 @@
 
 
 
-require('dotenv').config();
-
 var aws = require('aws-sdk')
 var multer = require('multer')
 var multerS3 = require('multer-s3')
@@ -37,7 +35,7 @@ class awsService {
     })
   }
   fileFilterImage() {
-    const fileFilter = function (req, file, callback) {
+    const fileFilter = function (_req, file, callback) {
       if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
         callback(null, true)
       }
@@ -71,3 +69,4 @@ class awsService {
 let awsObj1 = new awsService(process.env.SecretAccessKey, process.env.AccessKeyID, process.env.region
 )
 module.exports = awsObj1.upload()
+ 

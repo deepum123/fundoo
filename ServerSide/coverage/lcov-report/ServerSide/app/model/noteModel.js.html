@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">78.57% </span>
+        <span class="strong">75% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>44/56</span>
+        <span class='fraction'>42/56</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">58.33% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>8/12</span>
+        <span class='fraction'>7/12</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">77.42% </span>
+        <span class="strong">74.19% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>24/31</span>
+        <span class='fraction'>23/31</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">78.57% </span>
+        <span class="strong">75% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>44/56</span>
+        <span class='fraction'>42/56</span>
       </div>
     </div>
     <p class="quiet">
@@ -404,7 +404,10 @@
 <a name='L356'></a><a href='#L356'>356</a>
 <a name='L357'></a><a href='#L357'>357</a>
 <a name='L358'></a><a href='#L358'>358</a>
-<a name='L359'></a><a href='#L359'>359</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L359'></a><a href='#L359'>359</a>
+<a name='L360'></a><a href='#L360'>360</a>
+<a name='L361'></a><a href='#L361'>361</a>
+<a name='L362'></a><a href='#L362'>362</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -604,19 +607,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -857,24 +863,24 @@ class notemodel {
             description: data.description,
             color: data.color
         })
-         
-        var myPromise = new Promise(function(resolve, reject) { 
-                newNote.save((err, data) =&gt; {
-                    <span class="missing-if-branch" title="if path not taken" >I</span>if(err){
-<span class="cstat-no" title="statement not covered" >                        reject(err)</span>
-                    }else{
-                    resolve(data) 
-                    }
-                })
+&nbsp;
+        var myPromise = new Promise(function (resolve, reject) {
+            newNote.save((err, data) =&gt; {
+                <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
+<span class="cstat-no" title="statement not covered" >                    reject(err)</span>
+                } else {
+                    resolve(data)
+                }
             })
-           myPromise. 
-            then(function (result) { 
-                callback(null,result)
-            }). 
-            catch(<span class="fstat-no" title="function not covered" >fu</span>nction (result) { 
+        })
+        myPromise.
+            then(function (result) {
+                callback(null, result)
+            }).
+            catch(<span class="fstat-no" title="function not covered" >fu</span>nction (result) {
 <span class="cstat-no" title="statement not covered" >                callback(result)</span>
             });
-  
+&nbsp;
     }
 &nbsp;
     /*******************************************************************************************************
@@ -899,22 +905,22 @@ class notemodel {
         }
         */
     async deleteNote(data, callback) {
-        var myPromise = new Promise(function(resolve, reject) { 
+        var myPromise = new Promise(function (resolve, reject) {
             note.findOneAndDelete({ "_id": data.noteid }, (err, data) =&gt; {
-                if(err){
+                if (err) {
                     reject(err)
-                }else{
-                resolve(data) 
+                } else {
+                    resolve(data)
                 }
             })
         })
-       myPromise. 
-        then(function (result) { 
-            callback(null,result)
-        }). 
-        catch(function (result) { 
-            callback(result) 
-        });
+        myPromise.
+            then(function (result) {
+                callback(null, result)
+            }).
+            catch(function (result) {
+                callback(result)
+            });
 &nbsp;
     }
 &nbsp;
@@ -960,22 +966,25 @@ class notemodel {
       }
       */
     async  getAll(data, callback) {
-        var myPromise = new Promise(function(resolve, reject) { 
-            note.find({ 'userId': data.userId }, (err, data) =&gt; {
-                <span class="missing-if-branch" title="if path not taken" >I</span>if(err){
-<span class="cstat-no" title="statement not covered" >                    reject(err)</span>
-                }else{
-                resolve(data) 
-                }
-            })
+        var myPromise = new Promise(function (resolve, reject) {
+            note.find({ 'userId': data.userId })
+                .skip((perPage * page) - perPage)
+                .limit(perPage)
+                .end(<span class="fstat-no" title="function not covered" >(e</span>rr, data) =&gt; {
+<span class="cstat-no" title="statement not covered" >                    if (err) {</span>
+<span class="cstat-no" title="statement not covered" >                        reject(err)</span>
+                    } else {
+<span class="cstat-no" title="statement not covered" >                        resolve(data)</span>
+                    }
+                })
         })
-       myPromise. 
-        then(function (result) { 
-            callback(null,result)   
-        }). 
-        catch(<span class="fstat-no" title="function not covered" >fu</span>nction (result) { 
-<span class="cstat-no" title="statement not covered" >            callback(result) </span>
-        });
+        myPromise.
+            then(<span class="fstat-no" title="function not covered" >fu</span>nction (result) {
+<span class="cstat-no" title="statement not covered" >                callback(null, result)</span>
+            }).
+            catch(function (result) {
+                callback(result)
+            });
 &nbsp;
     }
 &nbsp;
@@ -1008,22 +1017,22 @@ class notemodel {
 &nbsp;
     async Update(data, field, callback) {
 &nbsp;
-        var myPromise = new Promise(function(resolve, reject) { 
+        var myPromise = new Promise(function (resolve, reject) {
             note.findOneAndUpdate({ '_id': data.noteid }, field, (err, data) =&gt; {
-                if(err){
+                if (err) {
                     reject(err)
-                }else{
-                resolve(data) 
+                } else {
+                    resolve(data)
                 }
             })
         })
-       myPromise. 
-        then(function (result) { 
-            callback(null,result) 
-        }). 
-        catch(function (result) { 
-            callback(result) 
-        });
+        myPromise.
+            then(function (result) {
+                callback(null, result)
+            }).
+            catch(function (result) {
+                callback(result)
+            });
     }
 &nbsp;
 &nbsp;
@@ -1052,22 +1061,22 @@ class notemodel {
       }
   */
 <span class="fstat-no" title="function not covered" >    as</span>ync deleteMany(data, field, callback) {
-        var myPromise = <span class="cstat-no" title="statement not covered" >new Promise(<span class="fstat-no" title="function not covered" >fu</span>nction(resolve, reject) { </span>
+        var myPromise = <span class="cstat-no" title="statement not covered" >new Promise(<span class="fstat-no" title="function not covered" >fu</span>nction (resolve, reject) {</span>
 <span class="cstat-no" title="statement not covered" >            note.deleteMany({ $and: [{ 'userId': data.userId }, field] }, <span class="fstat-no" title="function not covered" >(e</span>rr, data) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                if(err){</span>
+<span class="cstat-no" title="statement not covered" >                if (err) {</span>
 <span class="cstat-no" title="statement not covered" >                    reject(err)</span>
-                }else{
-<span class="cstat-no" title="statement not covered" >                resolve(data) </span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    resolve(data)</span>
                 }
             })
         })
-<span class="cstat-no" title="statement not covered" >       myPromise. </span>
-        then(<span class="fstat-no" title="function not covered" >fu</span>nction (result) { 
-<span class="cstat-no" title="statement not covered" >            callback(null,result)</span>
-        }). 
-        catch(<span class="fstat-no" title="function not covered" >fu</span>nction (result) { 
-<span class="cstat-no" title="statement not covered" >            callback(result) </span>
-        });
+<span class="cstat-no" title="statement not covered" >        myPromise.</span>
+            then(<span class="fstat-no" title="function not covered" >fu</span>nction (result) {
+<span class="cstat-no" title="statement not covered" >                callback(null, result)</span>
+            }).
+            catch(<span class="fstat-no" title="function not covered" >fu</span>nction (result) {
+<span class="cstat-no" title="statement not covered" >                callback(result)</span>
+            });
     }
 &nbsp;
 &nbsp;
@@ -1098,22 +1107,22 @@ class notemodel {
        }
        */
     async  search(data, field, callback) {
-        var myPromise = new Promise(function(resolve, reject) { 
+        var myPromise = new Promise(function (resolve, reject) {
             note.find({ $and: [{ 'userId': data.userId }, field] }, (err, data) =&gt; {
-                if(err){
+                if (err) {
                     reject(err)
-                }else{
-                resolve(data) 
+                } else {
+                    resolve(data)
                 }
             })
         })
-       myPromise. 
-        then(function (result) { 
-            callback(null,result)
-        }). 
-        catch(function (result) { 
-            callback(result)
-        });
+        myPromise.
+            then(function (result) {
+                callback(null, result)
+            }).
+            catch(function (result) {
+                callback(result)
+            });
     }
 &nbsp;
 }
@@ -1126,7 +1135,7 @@ module.exports = noteObj</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 08 2019 17:54:53 GMT+0530 (IST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Jul 13 2019 12:41:37 GMT+0530 (India Standard Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

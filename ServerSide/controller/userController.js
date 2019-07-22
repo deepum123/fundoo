@@ -55,10 +55,10 @@ module.exports.userControllerRegister = (req, res) => {
                     const payload = { id: data.id }
                     //  A token is passed for authentication. It supports the stateless API calls.
                     const token = tokenGenn.tokenGen(payload)
-                    //  console.log("111", token.token
-                    redisSet.redisset(payload, token)
+                      console.log("111", token.token,"1111111")
+                    redisSet.redisset(token.token, token.token)
 
-                    const url = process.env.verfEmail + token.token
+                    const url =process.env.verfEmail + token.token
                     var subject = "email verification link"
                     sendMailer.sendMailer(url, subject)
                     return res.status(200).send({
@@ -112,7 +112,7 @@ module.exports.userControllerLogin = (req, res) => {
                     //  A token is passed for authentication. It supports the stateless API calls.
                     const token = tokenGenn.tokenGen(payload)
 
-                    redisSet.redisset(payload, token)
+                    redisSet.redisset(token, token)
                     return res.status(200).send({
                         success: true,
                         message: "user is successfully login",
@@ -162,9 +162,9 @@ module.exports.userControllerForgotPassword = (req, res) => {
                     //  A token is passed for authentication. It supports the stateless API calls.
                     const token = tokenGenn.tokenGen(payload)
                     //  console.log("111", token.token
-                    redisSet.redisset(payload, token)
+                    redisSet.redisset(token.token, token.token)
 
-                    const url = process.env.resetlink + token.token
+                    const url =process.env.resetpassword + token.token
                     var subject = "resetPassword link"
                     sendMailer.sendMailer(url, subject)
                     return res.status(200).send({
