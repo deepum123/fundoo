@@ -1,6 +1,6 @@
 <html>
 <div fxLayoutAlign="space-around center" fxFlex="100">
-  <mat-card >
+  <mat-card>
     <div>
       <mat-card-title class="fundoo" fxLayout="row" fxLayoutAlign="center center">
         <span class="f">Fundoo</span>
@@ -20,17 +20,17 @@
       <!-- usre email id -->
 
       <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-around center">
- 
-        <mat-form-field appearance="outline" >
-          <mat-label > First name</mat-label>
-          <input matInput placeholder="First name"  [formControl]="firstname" />
+
+        <mat-form-field appearance="outline">
+          <mat-label> First name</mat-label>
+          <input matInput placeholder="First name" [formControl]="firstname" />
           <mat-icon matSuffix>person</mat-icon>
           <mat-error *ngIf="
           firstname.hasError('pattern')&&!firstname.hasError('minlength') 
         ">
-            Please enter a valid  alpa  letters only
+            Please enter a valid alpa letters only
           </mat-error>
-          
+
           <mat-error *ngIf="
           firstname.hasError('minlength') 
         ">
@@ -39,35 +39,35 @@
           <mat-error *ngIf="firstname.hasError('required')">
             firstname is <strong>required</strong>
           </mat-error>
-          
+
         </mat-form-field>
-   
-        <mat-form-field appearance="outline" >
-          <mat-label aria-autocomplete="off" > Last name</mat-label>
+
+        <mat-form-field appearance="outline">
+          <mat-label aria-autocomplete="off"> Last name</mat-label>
           <mat-icon matSuffix>person</mat-icon>
-         
-       <input matInput placeholder="Last name"  [formControl]="lastname" />
-       <mat-error *ngIf="
+
+          <input matInput placeholder="Last name" [formControl]="lastname" />
+          <mat-error *ngIf="
        lastname.hasError('pattern')&&!lastname.hasError('minlength') 
      ">
-         Please enter a valid  alpa  letters only
-       </mat-error>
-       
-       <mat-error *ngIf="
+            Please enter a valid alpa letters only
+          </mat-error>
+
+          <mat-error *ngIf="
        lastname.hasError('minlength') 
      ">
-         min 3 letter required
-       </mat-error>
-       <mat-error *ngIf="lastname.hasError('required')">
-         lastname is <strong>required</strong>
-       </mat-error>
-      </mat-form-field>
+            min 3 letter required
+          </mat-error>
+          <mat-error *ngIf="lastname.hasError('required')">
+            lastname is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
 
       </div>
-      <div  div fxLayout="column" fxLayoutAlign="space-around stretch"  >
-        <mat-form-field appearance="outline" >
+      <div div fxLayout="column" fxLayoutAlign="space-around stretch">
+        <mat-form-field appearance="outline">
           <mat-label>Email id</mat-label>
-          <input matInput placeholder="Enter your email id" [formControl]="email"  />
+          <input matInput placeholder="Enter your email id" [formControl]="email" />
           <mat-icon matSuffix>email</mat-icon>
           <mat-error *ngIf="
           email.hasError('email')
@@ -80,57 +80,58 @@
         </mat-form-field>
 
         <!-- user password -->
-       
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px" >
-        <mat-form-field appearance="outline" >
-          <mat-label aria-autocomplete="off" >Enter your password</mat-label>
-          <input matInput placeholder="Enter your password"  [type]="hide ? 'password' : 'text'"
-            [formControl]="password" autocomplete="off" requried />
+
+      </div>
+      <div fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field appearance="outline">
+          <mat-label aria-autocomplete="off">Enter your password</mat-label>
+          <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" [formControl]="password"
+            autocomplete="off" requried />
           <mat-icon matSuffix (click)="hide = !hide">{{
               hide ? "visibility_off" : "visibility"
             }}</mat-icon>
-            <mat-error *ngIf="
+          <mat-error *ngIf="
             password.hasError('minlength')
           ">
-          min 8 letters required
-            </mat-error>
-            <mat-error *ngIf="password.hasError('required')">
-              password is <strong>required</strong>
-            </mat-error>
+            min 8 letters required
+          </mat-error>
+          <mat-error *ngIf="password.hasError('required')">
+            password is <strong>required</strong>
+          </mat-error>
         </mat-form-field>
 
 
 
-        <mat-form-field appearance="outline" >
-          <mat-label aria-autocomplete="off" >Confirm Password</mat-label>
+        <mat-form-field appearance="outline">
+          <mat-label aria-autocomplete="off">Confirm Password</mat-label>
           <input matInput placeholder=" Enter your password" [type]="hide ? 'password' : 'text'"
             [formControl]="confirmpassword" autocomplete="off" requried />
           <mat-icon matSuffix (click)="hide = !hide">{{
                 hide ? "visibility_off" : "visibility"
               }}</mat-icon>
-              <mat-error *ngIf="
+          <mat-error *ngIf="
               confirmpassword.hasError('minlength')
             ">
-                 min 8 letters required
-              </mat-error>
-              <mat-error *ngIf="confirmpassword.hasError('required')">
-                confirm password is <strong>required</strong>
-              </mat-error>
+            min 8 letters required
+          </mat-error>
+          <mat-error *ngIf="confirmpassword.hasError('required')">
+            confirm password is <strong>required</strong>
+          </mat-error>
         </mat-form-field>
 
-</div>
-<div fxLayout="row" fxLayoutGap="250px" >
-      <button  mat-button (click)="register()" fxLayoutAlign="center center"
-        mat-raised-button color="primary" aria-label="Show an example snack-bar">
-        Register
-      </button>
-      <button   mat-button (click)="login()" fxLayoutAlign="center center"
-        mat-raised-button color="primary" aria-label="Show an example snack-bar">
-        login
-      </button>
+      </div>
+      <div fxLayout="row" fxLayoutGap="250px">
+        <button mat-button (click)="register()" fxLayoutAlign="center center" mat-raised-button color="primary"
+          aria-label="Show an example snack-bar">
+          Register
+        </button>
+        <button mat-button (click)="login()" fxLayoutAlign="center center" mat-raised-button color="primary"
+          aria-label="Show an example snack-bar">
+          login
+        </button>
       </div>
     </body>
   </mat-card>
 </div>
+
 </html>

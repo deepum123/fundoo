@@ -1,0 +1,11 @@
+<app-note (addingNote)="recievemessage($event)"></app-note>
+
+<div class="pinned" class="pinned1" *ngIf="cards.length >0">PINNED</div>
+<app-displaynote [cards]="cards" class="notes" 
+    (dialogResult)='dialogResult($event)' fxLayoutAlign="center none" (emitPinnedCard)="getPinCard($event)"
+    (emitUnPinnedCard)='getUnpinCard($event)'></app-displaynote>
+
+<div class="others" class="unpinned1" *ngIf="allcards.length >0 && cards.length >0">OTHERS</div>
+<app-displaynote [cards]="allcards"  
+    (dialogResult)='dialogResult($event)' fxLayoutAlign="start center" (emitPinnedCard)="getPinCard($event)">
+</app-displaynote>

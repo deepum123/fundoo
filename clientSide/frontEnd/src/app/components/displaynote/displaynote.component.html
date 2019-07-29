@@ -1,0 +1,84 @@
+<!-- <div cdkDrag cdkDropList (cdkDropList)="drop($event)" *ngFor="let array of cards | search: Search" fxLayout="row wrap" fxLayoutAlign="start center" fxLayout.xs="column" > -->
+
+  <div  *ngIf="gridView==true" fxLayout="row wrap">
+    <div cdkDropList [cdkDropListData]="cards" [cdkDropListConnectedTo]="secondList" #firstList="cdkDropList"
+    (cdkDropListDropped)="drop($event,cards)" fxLayout="row wrap" fxLayoutAlign="start center" fxLayout.xs="column">
+    <div class="maindiv" cdkDrag *ngFor="let array of cards ">
+      <mat-card [style.backgroundColor]="array.color" fxFlex.xs="100" fxLayout="column" class="matcard" fxFlex="45"
+        fxFlexOffset.xl="10">
+        <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs="97" fxLayout="row" fxLayoutAlign="start center">
+  
+          <div fxLayout="column" fxFlex="100">
+            <div fxLayout="row" fxLayoutAlign="space-between start" fxFlex="100">
+  
+              <div fxFlex="85" fxLayout="row wrap" fxFlex="90" fxFlexOffset.xl="20" fxFlex.xs="97"
+                (click)="openDialog(array, array.id)">
+                <mat-card-title matTextareaAutosize class="title">{{ array.title }}
+                </mat-card-title>
+              </div>
+  
+  
+            </div>
+            <div>
+              <div fxLayoutAlign="start center" (click)="openDialog(array, array.id)">
+                <mat-card-title matTextareaAutosize class="discp" fxLayout="row wrap">{{ array.description }}
+                </mat-card-title>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- reminder -->
+  
+       
+  
+  
+        <!-- more menu icon button -->
+  
+       
+  
+        <!-- TO IMPORT ICONS FROM ICONLIST -->
+  
+      </mat-card>
+    </div>
+  </div>
+  </div>
+  <!-- grid viewwwwwwwwwww -->
+  <!-- <div cdkDrag cdkDropList (cdkDropList)="drop($event)" *ngFor="let array of cards | search: Search" fxLayout="row wrap" fxLayoutAlign="start center" fxLayout.xs="column" > -->
+  
+      <div *ngIf="gridView==false" fxLayout="column wrap">
+          <div cdkDropList [cdkDropListData]="cards" [cdkDropListConnectedTo]="secondList" #firstList="cdkDropList"
+          (cdkDropListDropped)="drop($event,cards)" fxLayout="row wrap" fxLayoutAlign="start center" fxLayout.xs="column">
+          <div class="maindiv" cdkDrag *ngFor="let array of cards "> 
+            <mat-card [style.backgroundColor]="array.color" fxFlex.xs="100" fxLayout="column" class="matcard2" fxFlex="45"
+              fxFlexOffset.xl="10">
+              <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs="97" fxLayout="row" fxLayoutAlign="start center">
+                <div fxLayout="column" fxFlex="100">
+                  <div fxLayout="row" fxLayoutAlign="space-between start" fxFlex="100">
+        
+                    <div fxFlex="85" fxLayout="row wrap" fxFlex="90" fxFlexOffset.xl="20" fxFlex.xs="97"
+                      (click)="openDialog(array, array.id)">
+                      <mat-card-title matTextareaAutosize class="title">{{ array.title }}
+                      </mat-card-title>
+                    </div>
+        
+        
+                  </div>
+                  <div>
+                    <div fxLayoutAlign="start center" (click)="openDialog(array,  array.id)">
+                      <mat-card-title matTextareaAutosize class="discp" fxLayout="row wrap">{{ array.description }}
+                      </mat-card-title>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        
+              <!-- reminder -->
+        
+        
+              <!-- more menu icon button -->
+        
+            </mat-card>
+          </div>
+        </div>
+        </div>

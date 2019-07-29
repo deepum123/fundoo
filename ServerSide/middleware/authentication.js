@@ -22,10 +22,11 @@ var client = redis.createClient();
 
 module.exports.auth = (req, res, next) => {
     try {
-        var token =  req.params.token
+        console.log("hiikdasf",req.header('token'))
+        var tokenn = req.header('token') || req.params.token
 
          console.log("22222", req.params.token)
-        client.get(token, function (err, token) {
+        client.get(tokenn, function (err, token) {
             if (err) {
                 console.log("error in if block",err);
                 

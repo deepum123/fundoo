@@ -25,12 +25,15 @@ module.exports.noteControllerCreateNote = (req, res) => {
             userId: req.id,
             title: req.body.title,
             description: req.body.description,
-            color: req.body.color
+            color: req.body.color,
+            pinned:req.body.pinned,
+            trash:req.body.trash,
+            archive:req.body.archive,
 
         }
         req.checkBody('title', 'title is required').notEmpty();
         req.checkBody('description', 'description is required').notEmpty();
-        req.checkBody('color', 'color is required').notEmpty();
+       
         var errors = req.validationErrors();
         var response = {}
         if (errors) {
@@ -73,10 +76,10 @@ module.exports.noteControllerGetNotes = (req, res) => {
     try {
         logger.info("  get notes req body   data ", req.body)
         var data = {
-            page: req.body.page,
+           
             userId: req.id
         }
-        req.checkBody('page', 'page number is required').notEmpty();
+        //req.checkBody('page', 'page number is required').notEmpty();
         var errors = req.validationErrors();
         var response = {}
         if (errors) {

@@ -91,7 +91,10 @@ class notemodel {
             userId: data.userId,
             title: data.title,
             description: data.description,
-            color: data.color
+            color: data.color,
+            trash:data.trash,
+            pinned:data.pinned,
+            archive:data.archive,
         })
 
         var myPromise = new Promise(function (resolve, reject) {
@@ -195,12 +198,13 @@ class notemodel {
               })
       }
       */
+     
     async  getAll(data, callback) {
+        
         var myPromise = new Promise(function (resolve, reject) {
-            note.find({ 'userId': data.userId })
-                .skip((perPage * page) - perPage)
-                .limit(perPage)
-                .end((err, data) => {
+            note.find({ 'userId': data.userId }
+               
+            , (err, data) => {
                     if (err) {
                         reject(err)
                     } else {

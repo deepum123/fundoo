@@ -51,4 +51,39 @@ export class UserService {
     };
     return this.httpService.resetPassword(option);
   }
+  usernote(requestBody) {
+    const option = {
+      url: 'createNote',
+      body: requestBody
+    };
+    return this.httpService.postWithTokenNotes(option);
+  }
+  getnotee() {
+    const option = {
+      url: 'getAllNotes',
+      
+    };
+    return this.httpService.getCards(option);
+  }
+  doPin(requestBody) {
+    const option = {
+      url: 'isPinned',
+      body: requestBody
+    };
+    return this.httpService.doPin(option);
+  }
+  updateNoteTittle(requestBody) {
+    const option = {
+      url: 'editTitle',
+      body: requestBody
+    };
+    return this.httpService.updateNoteTittle(option);
+  }
+  updateNoteDescription(requestBody) {
+    const option = {
+      url: 'editDescription',
+      body: requestBody
+    };
+    return this.httpService. updateNoteTittle(option);
+  }
 }

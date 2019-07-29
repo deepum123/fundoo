@@ -1,0 +1,60 @@
+
+<!-- TO DISPLAT TAKE NOTE  -->
+<div *ngIf="flag === true" class="body" (click)="reverseFlag()" fxLayout="row" fxLayoutAlign="space-around start"
+  fxFlex="100">
+  <mat-card fxFlex="45" fxFlex.xs="100" class="matcard" fxLayoutAlign="space-between center"
+    style="padding-bottom:0px;padding-top:0px">
+    <div data-text="Take a note..." class="Border" id="noteTitle" fxLayout="column" contenteditable="true"
+      class="maincard"></div>
+    <div fxLayout="row" fxLayoutAlign="end start">
+      <button mat-icon-button>
+        <mat-icon class="check" matTooltip="New List"><img id="img2"
+            src="../../../assets//images/outline-check_box-24px (1).svg" /></mat-icon>
+      </button>
+
+      <button mat-icon-button>
+        <mat-icon class="check" matTooltip="New note with drawing"><img id="img2"
+            src="../../../assets/images/outline-brush-24px.svg" /></mat-icon>
+      </button>
+
+      <button mat-icon-button>
+        <mat-icon class="insert" matTooltip="New note with image"><img id="img2"
+            src="../../../assets/images/outline-photo-24px.svg" /></mat-icon>
+      </button>
+    </div>
+  </mat-card>
+</div>
+
+<!-- TO DISPLAY TITLE AND TAKE A NOTE -->
+<div *ngIf="flag === false" fxLayout="row" fxLayoutAlign="space-around start" fxFlex="100">
+  <mat-card fxLayout="column" class="matcard" fxFlex="45" fxFlexOffset.xl="60" fxFlex.xs="100"
+    [style.backgroundColor]="bgcolor">
+    <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs="97" fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="Border" fxLayout="column" class="takenote">
+        <textarea class="textArea" matTextareaAutosize placeholder="Title" [formControl]="noteTitle"></textarea>
+      </div>
+      <div fxLayout="row">
+        <button mat-icon-button color="basic" (click)="pinned()" id="pin">
+          <div class="barpin" *ngIf="flag1==false">
+            <img src="../../../assets/images/pinbar.svg" (click)='dopin(false)' />
+          </div>
+
+          <div class="barpin" *ngIf="flag1==true">
+            <img src="../../../assets/images/unpinbar.svg" (click)='dopin(true)' />
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div class="Border" fxLayout="column" class="takenote">
+      <textarea class="textArea" matTextareaAutosize placeholder="Take a note..."
+        [formControl]="noteContent"></textarea>
+    </div>
+    <div fxFlex="50" fxLayoutAlign="end center">
+      <button class="addnote" mat-button (click)="addNote()">
+        close
+      </button>
+    </div>
+</mat-card>
+</div>
+

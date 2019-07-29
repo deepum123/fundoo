@@ -25,7 +25,6 @@ export class HttpService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'token': localStorage.getItem('resetPassword')
       })
     };
     return this.http.get(environment.baseUrl + options.url, options.body);
@@ -36,7 +35,6 @@ export class HttpService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'token': localStorage.getItem('token')
       })
     };
     return this.http.post(environment.baseUrl + options.url, options.body, httpOptions);
@@ -47,11 +45,45 @@ export class HttpService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'token': localStorage.getItem('token')
       })
     };
     return this.http.post(environment.baseUrl + options.url, options.body, httpOptions);
     
   }
-
+  postWithTokenNotes(options) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'token': localStorage.getItem('token')
+      })
+    };
+    return this.http.post(environment.baseUrl + options.url, options.body, httpOptions);
+  }
+  getCards(option) {
+    const httpToken = {
+      headers: new HttpHeaders({
+        'content-Type': 'application/json',
+        'token': localStorage.getItem('token')
+      })
+    }
+    return this.http.get(environment.baseUrl + option.url, httpToken);
+  }
+  doPin(data) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'token': localStorage.getItem('token')
+      })
+    };
+    return this.http.put(environment.baseUrl + data.url, data.body, httpOptions);
+  } 
+  updateNoteTittle(data) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'token': localStorage.getItem('token')
+      })
+    };
+    return this.http.put(environment.baseUrl + data.url, data.body, httpOptions);
+  }
 }

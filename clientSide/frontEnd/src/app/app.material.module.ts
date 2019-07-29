@@ -6,7 +6,10 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { NgModule } from '@angular/core';
 import { TextFieldModule } from '@angular/cdk/text-field';
 
+
+
 import {MatSidenavModule} from '@angular/material/sidenav';
+
 
 
 // import {MatMenuModule} from '@angular/material/menu';
@@ -56,6 +59,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout'
 @NgModule({
   imports: [
+    MatMenuModule,
     MatSidenavModule,
     MatInputModule,
     FormsModule,
@@ -113,6 +117,7 @@ import { FlexLayoutModule } from '@angular/flex-layout'
     // ContenteditableModule
   ],
   exports: [
+    MatMenuModule,
     MatSidenavModule,
     MatToolbarModule,
     CdkTableModule,

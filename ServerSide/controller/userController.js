@@ -112,7 +112,7 @@ module.exports.userControllerLogin = (req, res) => {
                     //  A token is passed for authentication. It supports the stateless API calls.
                     const token = tokenGenn.tokenGen(payload)
 
-                    redisSet.redisset(token, token)
+                    redisSet.redisset(token.token, token.token)
                     return res.status(200).send({
                         success: true,
                         message: "user is successfully login",
@@ -263,7 +263,7 @@ module.exports.userControllerUploadImage = (req, res) => {
 
         console.log("\npic location --------<", req.file.location);
         var data = {
-            address: req.file.location,
+            address: req.location,
             userId: req.id
         }
         services.userServicesUploadImage(data, (err, data) => {

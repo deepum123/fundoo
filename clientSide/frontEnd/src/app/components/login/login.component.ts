@@ -32,7 +32,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  model = {};
+  hide = true;
   login() {
     try {
       if (this.emailFormControl.value == "" || this.password.value == "")

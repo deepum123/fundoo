@@ -6,15 +6,32 @@ import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassw
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 import { VerificationComponent } from './components/verification/verification.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AuthguardService } from './service/authguard/authguard.service';
+import { NoteComponent } from './components/note/note.component';
+import { CardnoteComponent } from './components/cardnote/cardnote.component';
+import { DisplaynoteComponent } from './components/displaynote/displaynote.component';
+import { UpdatenoteComponent } from './components/updatenote/updatenote.component';
 const routes: Routes = [
-
+  {
+    path: '',
+    component: LoginComponent
+  },
   {
     path: 'login',
     component: LoginComponent
   },
   {
+    path: 'u',
+    component: UpdatenoteComponent
+  },
+  {
     path: 'register',
     component: RegisterComponent
+  },
+  
+  {
+    path:'note',
+    component:NoteComponent
   },
   {
     path: 'forgotpassword',
@@ -32,8 +49,32 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent
   },
-
+  {
+    path : 'cardnotes',
+    component:CardnoteComponent
+  },
+  {
+    path:'dashboard',
+    component:DashboardComponent,canActivate:[AuthguardService],
+    children:[
+      {
+        path:'',
+        redirectTo : 'cardnotes',
+        pathMatch : 'full'
+      },
+      {
+        path:'note',
+        component:NoteComponent
+      },
+      {
+            path : 'cardnotes',
+            component:CardnoteComponent
+          }
+    ]
+  }
+    
 ];
+  
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

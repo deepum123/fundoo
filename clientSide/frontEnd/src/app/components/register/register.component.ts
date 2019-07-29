@@ -14,7 +14,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
     form: FormGroupDirective | NgForm | null
-  ): boolean {
+  ): boolean {  
     const isSubmitted = form && form.submitted;
     return !!(
       control &&
@@ -33,7 +33,6 @@ export class RegisterComponent implements OnInit {
     private route: Router,
     private userservice: UserService,
     private snackBar: MatSnackBar,
-    public userService: UserService
   ) {}
 
   ngOnInit() {

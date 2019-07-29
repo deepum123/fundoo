@@ -1,0 +1,39 @@
+<div [style.backgroundColor]=data.array.color fxFlex='100' class="main">
+
+    <div style="margin: 20px">
+      <div fxFlex="100" fxLayoutAlign='space-between start' fxLayout='row'>
+        <div *ngIf="data.more !='trash'"><input matInput [(ngModel)]="data.array.title" placeholder="add title here">
+        </div>
+        <div class="title" *ngIf="data.more =='trash'" (click)='openSnackBar()'>{{data.array.title}}</div>
+        <div *ngIf="data.more !='trash'">
+          <button mat-icon-button color="basic">
+            <div class="barpin" *ngIf="data.array.pinned">
+              <img src="../../../assets/images/pinbar.svg" (click)='doUnPin(data.array)' />
+            </div>
+            <div class="barpin" *ngIf="!data.array.pinned">
+              <img src="../../../assets/images/unpinbar.svg" (click)='doPin(data.array)' />
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <div style="margin:20px">
+      <!-- ....disc...... -->
+  
+      <div *ngIf="data.more!='trash'"><input class='desc' matInput [(ngModel)]="data.array.description"
+          placeholder="Add description"></div>
+      <div *ngIf="data.more=='trash'" (click)='openSnackBar()'>{{data.array.description}}</div>
+  
+      <!-- ..... -->
+  
+      <!-- <app-iconlist></app-iconlist> -->
+  
+      <div fxLayoutAlign='space-between end'>
+      <div></div>
+  
+        <button fxLayoutAlign='end end' mat-button [mat-dialog-close]="data" cdkFocusInitial>close</button>
+      </div>
+    </div>
+  
+  </div>
