@@ -41,8 +41,9 @@ export class DisplaynoteComponent implements OnInit {
    *********************************/
   @Input() childMessage: string;
   @Input() cards;
+  @Input() Search;
   @Input() more: string;
-  @Input() type;
+  // @Input() type;
   @Input() archived;
   @Input() card: [];
   @Output() color = new EventEmitter();
@@ -51,7 +52,7 @@ export class DisplaynoteComponent implements OnInit {
   @Output() dialogResult = new EventEmitter();
   @Output() emitMainNote = new EventEmitter();
   @Input() More;
-  @Input() Search;
+  // @Input() Search;
   @Input()
   @Input()
   pin;
@@ -59,10 +60,19 @@ export class DisplaynoteComponent implements OnInit {
   pinnedValue;
   item:any[];
   notemessage:any;
-
+type="notee"
   model;
   flag1 = true;
-  
+  todaydate = new Date();
+  tomorrow = new Date(
+    this.todaydate.getFullYear(),
+    this.todaydate.getMonth(),
+    this.todaydate.getDate() + 1,
+    0,
+    0,
+    0,
+    0
+  );
  
   array: any[];
   // displaymode:boolean=true
@@ -71,7 +81,7 @@ export class DisplaynoteComponent implements OnInit {
     public http: HttpService,
     public userService: UserService,
     public dialog: MatDialog,
-
+    public noteService: NoteServicesService ,
     private snackBar: MatSnackBar,
     private view : CurrentViewService
   ) {
@@ -139,8 +149,62 @@ export class DisplaynoteComponent implements OnInit {
        });
     });
   }
-
+  restore(card, more) {
+    try {
+      this.noteService
+        . trashNote({
+          trash: false,
+          noteId: [card._id]
+        })
+        .subscribe(
+          data => {
+            console.log(data, "response when delete");
+            let ind = this.cards.indexOf(card);
+            this.cards.splice(ind, 1);
+            // this.cardRestore(card)
+          },
+          err => console.log(err)
+        );
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  deleteForever(array) {
+    console.log("hahaha")
+    this.noteService
+      .deleteForever({
+        deleteNote: false,
+        noteId: [array._id]
+      })
+      .subscribe(
+        data => {
+          console.log(data, "response when delete");
+          let ind = this.cards.indexOf(array);
+          this.cards.splice(ind, 1);
+          // this.cardRestore(card)
+        },
+        err => console.log(err)
+      );
+  }
   
+
+
+  removeReminder(array,remainder) {
+    console.log(array._id,remainder, "bgcdvzjhzzzzzzzzzzzzzzzzzzz");
+
+    var model = { noteid: array._id, remainder:remainder};
+    console.log(model, "model");
+
+    this.noteService.removeRemainder(model).subscribe(data => {
+      window.location.reload();
+      // let ind = this.cards.indexOf(array);
+      // array.reminder.splice(ind, 1)
+    });
+  }
+
+
+
+
   notePin() {
     this.flag1 = !this.flag1;
   }
@@ -164,6 +228,32 @@ export class DisplaynoteComponent implements OnInit {
    *
    * @param l : label
    *************************************************************/
+
+  deleteLabelFromNote(card, l) {
+    // if(card != undefined){
+
+    console.log(card._id, "   hkjihjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj      ", l);
+
+    this.noteService
+      .removeLabel({
+        noteid: card._id,
+        label: l,
+     
+      })
+      .subscribe(
+        data => {
+          console.log("data in", data);
+          // let ind = card['label'].indexOf(l);
+          // card['label'].splice(ind, 1);
+          // //   let ind = l.indexOf(l)
+          // //  l.splice(ind, 1);
+           window.location.reload();
+        },
+        err => {
+          console.log(err);
+        }
+      );
+  }
 
 
 

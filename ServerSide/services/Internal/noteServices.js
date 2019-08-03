@@ -195,6 +195,18 @@ class noteServices {
             }
         })
     }
+    noteServiceRemoveRemainder(data, callback) {
+        var field = {
+            $pull:{remainder: data.remainder}
+        }
+        noteModel.Update(data, field, (err, data) => {
+            if (err) {
+                callback(err)
+            } else {
+                callback(null, data)
+            }
+        })
+    }
 
     /**************************************************************************** 
     *@description : To send   data about  erashTrash api to models and callback the return data to controller
@@ -236,13 +248,14 @@ class noteServices {
     noteServiceSearch(data, callback) {
         var field =
         {
-            $or: [
-                { "description": data.description },
-                { '_id': data.noteid },
-                { title: data.title },
-                { color: data.color },
+             title: data.title 
+            // $or: [
+            //     { "description": data.description },
+            //     { '_id': data.noteid },
+            //     { title: data.title },
+            //     { color: data.color },
 
-            ]
+            // ]
         }
 
         noteModel.search(data, field, (err, data) => {
@@ -250,6 +263,34 @@ class noteServices {
                 return callback(err)
             } else {
                 return callback(null, data)
+            }
+        })
+    }
+
+
+    noteServiceAddNoteToLabel(data, callback) {
+        var field = {
+            $addToSet:{label: data.label}
+        }
+        console.log("33333333333",field)
+        noteModel.Update(data, field, (err, data) => {
+            if (err) {
+                callback(err)
+            } else {
+                callback(null, data)
+            }
+        })
+    }
+    noteServiceRemoveNoteToLabel(data, callback) {
+        var field = {
+            $pull:{label: data.label}
+        }
+        console.log("33333333333",field)
+        noteModel.Update(data, field, (err, data) => {
+            if (err) {
+                callback(err)
+            } else {
+                callback(null, data)
             }
         })
     }

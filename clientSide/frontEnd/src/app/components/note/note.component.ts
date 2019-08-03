@@ -20,7 +20,18 @@ export class NoteComponent implements OnInit {
   model: any;
   response: any;
   isPined = false;
-
+  reminder = [];
+   labelid=[]
+  todaydate = new Date();
+  tomorrow = new Date(
+    this.todaydate.getFullYear(),
+    this.todaydate.getMonth(),
+    this.todaydate.getDate() + 1,
+    0,
+    0,
+    0,
+    0
+  );
   
   constructor(
     private userService: UserService,
@@ -40,20 +51,22 @@ export class NoteComponent implements OnInit {
   addNote() {
     console.log(localStorage.getItem("token"), "tokennnn");
     this.flag = !this.flag;
+    console.log("hhhhhhhhhhhhhhhhhhhhhhhhh",this.labelid)
     if (this.noteTitle || this.noteContent) {
       this.model = {
         
         title: this.noteTitle.value,
         description: this.noteContent.value,
-        // reminder: this.reminder,
-         pinned: this.isPined,
-        // archive: this.archive,
-        // color: this.bgcolor,
+            remainder: this.reminder,
+          pinned: this.isPined,
+          archive: this.archive,
+         color: this.bgcolor,
+         labelid:this.labelid,
         // trash: false,
-         reminder: "1255",
+        // remainder: "1255",
       //   pinned: true,
-        archive: false,
-         color: true,
+     
+        // color: true,
          trash: false
         // image: ""
       };
@@ -81,7 +94,11 @@ export class NoteComponent implements OnInit {
    *
    * @param:  to change color
    ************************************************************************/
- 
+  changeColor($event) {
+    console.log("Entered parent");
+
+    this.bgcolor = $event;
+  }
   /************************************************************************
    * to reverse the flag
    *************************************************************************/
@@ -92,6 +109,18 @@ export class NoteComponent implements OnInit {
   dopin(set) {
     this.isPined = set;
   }
- 
- 
+  archive($event) {
+    this.archive = $event;
+    this.addNote();
+  }
+  getReminder($event) {
+    // if (this.reminder[0] != undefined) {
+    //   this.reminder = [];
+    //   this.reminder.push($event);
+    // } else {
+      this.reminder.push($event)
+    }
+    getlabel($event){
+    this.labelid.push($event)
+  }
 }

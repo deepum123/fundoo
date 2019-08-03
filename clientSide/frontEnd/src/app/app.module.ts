@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-
+import { AsyncPipe } from '../../node_modules/@angular/common';
 import {MatFormFieldModule} from '@angular/material/form-field'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,15 +41,18 @@ import { IconlistComponent } from './components/iconlist/iconlist.component';
 import { LabeliditComponent } from './components/labelidit/labelidit.component';
 import { ImagecorpComponent } from './components/imagecorp/imagecorp.component';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatDatepickerModule,MatNativeDateModule} from '@angular/material';
+
 
 import { MatDialogModule } from '@angular/material/dialog';
-import { TakenoteComponent } from './components/takenote/takenote.component';
+
 import { CardnoteComponent } from './components/cardnote/cardnote.component';
 import { EditCardComponrntComponent } from './components/edit-card-componrnt/edit-card-componrnt.component';
 import { EditCardComponentComponent } from './components/edit-card-component/edit-card-component.component';
 
 import { LabelPipe } from './service/pipe/labelpipe/label.pipe';
 import { SearchPipe } from './service/pipe/searchpipe/search.pipe';
+import { LabelComponent } from './components/label/label.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,17 +74,21 @@ import { SearchPipe } from './service/pipe/searchpipe/search.pipe';
     IconlistComponent,
     LabeliditComponent,
     ImagecorpComponent,
-    TakenoteComponent,
+
     CardnoteComponent,
     EditCardComponrntComponent,
     EditCardComponentComponent,
     
     LabelPipe,
     SearchPipe,
+    LabelComponent,
   
   
   ],
   imports: [
+    MatNativeDateModule,
+ 
+    MatDatepickerModule,
     DragDropModule,
     MatIconModule,
     MatDialogModule,
@@ -111,7 +118,7 @@ import { SearchPipe } from './service/pipe/searchpipe/search.pipe';
     MatChipsModule
    
   ],
-  providers: [],
+  providers: [AsyncPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

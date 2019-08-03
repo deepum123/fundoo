@@ -86,7 +86,7 @@ noteServiceEditLabelName(data, callback) {
     ****************************************************************************/
 noteServiceAddNoteToLabel(data, callback) {
     var field = {
-        $addToSet:{noteid: data.noteid}
+        $addToSet:{label: data.labelid}
     }
     console.log("33333333333",field)
     labelModel.Update(data, field, (err, data) => {

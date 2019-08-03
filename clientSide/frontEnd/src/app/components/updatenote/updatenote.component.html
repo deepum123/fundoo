@@ -30,10 +30,13 @@
       <!-- <app-iconlist></app-iconlist> -->
   
       <div fxLayoutAlign='space-between end'>
-      <div></div>
-  
-        <button fxLayoutAlign='end end' mat-button [mat-dialog-close]="data" cdkFocusInitial>close</button>
+      <!-- icon -->
+      <div fxFlex='100' *ngIf="data.more!='trash'">
+        <app-iconlist [card]=data.array></app-iconlist>
       </div>
+
+      <button fxLayoutAlign='end end' mat-button [mat-dialog-close]="data" cdkFocusInitial>close</button>
     </div>
+  </div>
   
   </div>

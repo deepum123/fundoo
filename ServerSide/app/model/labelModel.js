@@ -100,22 +100,27 @@ class labelModel {
      * @param {*response from  backend to frontend } callback
      ******************************************************************************************************/
     async delete(data, callback) {
+        console.log("heeeeeeeeeeeeeeeeeeeeeeee",data.labelid)
         var myPromise = new Promise(function(resolve, reject) { 
-            label.deleteOne({'_id': data.labelid }, (err, data) => {
+            label.findOneAndDelete({ '_id': data.labelid }, (err, data) => {
                 if(err){
+                    console.log("heeeeeeeeeeeeeeeeeeeeeeee")
                     reject(err)
                 }else{
+                    console.log("yyyyyyyyyyyyyyyyyyyyyyyy")
                 resolve(data) 
                 }
             })
         })
        myPromise. 
         then(function (result) { 
-            callback(null,result)
+            console.log("resul",result)
+            callback(null,result) 
         }). 
         catch(function (result) { 
             callback(result)
         });
+
     }
  /*******************************************************************************************************
      * @description:it will update the label and stored in database
@@ -125,7 +130,7 @@ class labelModel {
     async Update(data, field, callback) {
         console.log("11111111111",data)
         var myPromise =  new Promise(function(resolve, reject) { 
-            label.findOneAndUpdate({ $and:[{userId: data.userId},{"_id":data.labelid}]}, field, (err, data) => {
+            note.findOneAndUpdate({ $and:[{userId: data.userId},{"_id":data.noteid}]}, field, (err, data) => {
                 if(err){
                     reject(err)
                 }else{
@@ -135,7 +140,7 @@ class labelModel {
         })
        myPromise. 
         then(function (result) { 
-            console.log("11111111111",result)
+            console.log("777777777777",result)
             callback(null,result)
         }). 
         catch(function (result) { 

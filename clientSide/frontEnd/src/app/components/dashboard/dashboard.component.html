@@ -19,14 +19,13 @@
     </div>
 
     <!-- ********************************** Search ***************************************** -->
-
     <div fxFlex="80" fxLayoutAlign="end start">
       <mat-form-field appearance="outline" fxHide.xs [style.fontSize.px]="2" class="search">
         <button mat-icon-button class="search-button">
           <mat-icon id="search" matTooltip="Search">search</mat-icon>
         </button>
 
-        <input fxFlex="90" [(ngModel)]="Search"  matInput placeholder="Search"
+        <input fxFlex="90" [(ngModel)]="Search" (keyup)='lookfor()' matInput placeholder="Search"
           [style.fontSize.px]="16" class="search-window" autocomplete="off" (click)='startSearch()' type="text" />
       </mat-form-field>
     </div>
@@ -34,7 +33,7 @@
     <!-- tool bar icons -->
 
     <div fxFlex="25" class="settingbtn">
-
+   
       <!-- refresh butto -->
 
       <button mat-icon-button color="basic" (click)="refresh()" id="refresh" matTooltip="Refresh">
@@ -143,12 +142,13 @@
               Reminders</mat-list-item>
           </div>
 
+       
           <mat-divider></mat-divider>
           <!-- *************************** labels *********************************** -->
 
           <!-- <div id="para">LABELS</div> -->
           <div *ngFor='let array of labelsList'>
-            <mat-list-item role="listitem" id="lable" (click)="sendLable()">
+            <mat-list-item role="listitem" id="lable" (click)="sendLable(array)">
               <mat-icon id="edit">label_outline</mat-icon>
               {{array.label}}
             </mat-list-item>
@@ -170,7 +170,7 @@
 
           <div>
             <mat-list-item role="listitem" id="bin" (click)="trashBox()">
-              <img id="img5" src="../../../assets/images/outline-delete_outline-24px.svg" />
+              <img id="img5" src="../../../assets/images/bin.svg" />
               Trash</mat-list-item>
           </div>
         </mat-list>

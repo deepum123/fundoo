@@ -29,6 +29,8 @@ module.exports.noteControllerCreateNote = (req, res) => {
             pinned:req.body.pinned,
             trash:req.body.trash,
             archive:req.body.archive,
+            remainder:req.body.remainder,
+            labelid:req.body.labelid
 
         }
         req.checkBody('title', 'title is required').notEmpty();
@@ -559,11 +561,11 @@ module.exports.noteControllerSearch = (req, res) => {
     try {
         logger.info(" note search   req body   data ", req.body)
         var data = {
-            userId: req.id,
-            noteid: req.body.noteid,
-            description: req.body.description,
+             userId: req.id,
+            // noteid: req.body.noteid,
+            // description: req.body.description,
             title: req.body.title,
-            color: req.body.color,
+            // color: req.body.color,
         }
         noteService.noteServiceSearch(data, (err, data) => {
             if (err) {
@@ -583,6 +585,129 @@ module.exports.noteControllerSearch = (req, res) => {
 
             }
         })
+    } catch (err) {
+        res.send(err)
+    }
+}
+
+module.exports.labelControllerAddNoteTolabel = (req, res) => {
+    try {
+        logger.info(" add note to label req body   data ", req.body)
+        console.log("sssssssssssss", req.body)
+        var data = {
+            userId: req.id,
+            labelid: req.body.labelid,
+            noteid: req.body.noteid
+        }
+        req.checkBody('labelid', 'labelid is required').notEmpty();
+        req.checkBody('noteid', 'noteid is required').notEmpty();
+        var errors = req.validationErrors();
+        var response = {}
+        if (errors) {
+            response.success = false
+            response.error = errors
+            return res.status(422).send(response)
+        } else {
+        noteService.noteServiceAddNoteToLabel(data, (err, data) => {
+
+                if (err) {
+                    logger.error("  Add Note To Label  error ", err)
+                    res.status(404).send({
+                        success: false,
+                        message: "error in  Add Note To Label function",
+                        data: err
+                    })
+                } else {
+                    logger.info("  Add Note To Label  res  data ", data)
+                    res.status(200).send({
+                        success: true,
+                        message: "successfully  Add Note To Label function is  done",
+                        data: data
+                    })
+                }
+            })
+        }
+    } catch (err) {
+        res.send(err)
+    }
+}
+
+
+module.exports.labelControllerRemoveNoteTolabel = (req, res) => {
+    try {
+        logger.info(" add note to label req body   data ", req.body)
+        console.log("sssssssssssss", req.body)
+        var data = {
+            userId: req.id,
+            label: req.body.label,
+            noteid: req.body.noteid
+        }
+        req.checkBody('label', 'labelid is required').notEmpty();
+        req.checkBody('noteid', 'noteid is required').notEmpty();
+        var errors = req.validationErrors();
+        var response = {}
+        if (errors) {
+            response.success = false
+            response.error = errors
+            return res.status(422).send(response)
+        } else {
+        noteService.noteServiceRemoveNoteToLabel(data, (err, data) => {
+
+                if (err) {
+                    logger.error("  Add Note To Label  error ", err)
+                    res.status(404).send({
+                        success: false,
+                        message: "error in  Add Note To Label function",
+                        data: err
+                    })
+                } else {
+                    logger.info("  Add Note To Label  res  data ", data)
+                    res.status(200).send({
+                        success: true,
+                        message: "successfully  Add Note To Label function is  done",
+                        data: data
+                    })
+                }
+            })
+        }
+    } catch (err) {
+        res.send(err)
+    }
+}
+module.exports.noteControllerRemoveRemainder = (req, res) => {
+    try {
+        logger.info(" note remainder req body   data ", req.body)
+        var data = {
+            noteid: req.body.noteid,
+            remainder: req.body.remainder
+        }
+        req.checkBody('remainder', 'remainder is required').notEmpty();
+        req.checkBody('noteid', 'noteid is required').notEmpty();
+        var errors = req.validationErrors();
+        var response = {}
+        if (errors) {
+            response.success = false
+            response.error = errors
+            return res.status(422).send(response)
+        } else {
+            noteService.noteServiceRemoveRemainder(data, (err, data) => {
+                if (err) {
+                    logger.error(" note controller note reminder  error ", err)
+                    res.status(404).send({
+                        success: false,
+                        message: "error in note controller update color  function",
+                        data: err
+                    })
+                } else {
+                    logger.info(" note remainder res  data ", data)
+                    res.status(200).send({
+                        success: true,
+                        message: "successfully note edit decription function is  done",
+                        data: data
+                    })
+                }
+            })
+        }
     } catch (err) {
         res.send(err)
     }

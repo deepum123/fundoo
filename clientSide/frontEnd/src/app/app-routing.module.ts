@@ -11,6 +11,8 @@ import { NoteComponent } from './components/note/note.component';
 import { CardnoteComponent } from './components/cardnote/cardnote.component';
 import { DisplaynoteComponent } from './components/displaynote/displaynote.component';
 import { UpdatenoteComponent } from './components/updatenote/updatenote.component';
+import { LabeliditComponent } from './components/labelidit/labelidit.component';
+import { SearchComponent } from './components/search/search.component';
 const routes: Routes = [
   {
     path: '',
@@ -49,9 +51,14 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent
   },
+  
   {
     path : 'cardnotes',
     component:CardnoteComponent
+  },
+  {
+    path : 'labeledit',
+    component:LabeliditComponent
   },
   {
     path:'dashboard',
@@ -69,7 +76,11 @@ const routes: Routes = [
       {
             path : 'cardnotes',
             component:CardnoteComponent
-          }
+          },
+          {
+            path: 'search',
+            component: SearchComponent
+          },
     ]
   }
     

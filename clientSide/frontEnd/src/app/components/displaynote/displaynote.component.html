@@ -1,11 +1,13 @@
 <!-- <div cdkDrag cdkDropList (cdkDropList)="drop($event)" *ngFor="let array of cards | search: Search" fxLayout="row wrap" fxLayoutAlign="start center" fxLayout.xs="column" > -->
 
   <div  *ngIf="gridView==true" fxLayout="row wrap">
+    
     <div cdkDropList [cdkDropListData]="cards" [cdkDropListConnectedTo]="secondList" #firstList="cdkDropList"
     (cdkDropListDropped)="drop($event,cards)" fxLayout="row wrap" fxLayoutAlign="start center" fxLayout.xs="column">
-    <div class="maindiv" cdkDrag *ngFor="let array of cards ">
+       <div class="maindiv" cdkDrag *ngFor="let array of cards | search: Search">
       <mat-card [style.backgroundColor]="array.color" fxFlex.xs="100" fxLayout="column" class="matcard" fxFlex="45"
         fxFlexOffset.xl="10">
+        
         <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs="97" fxLayout="row" fxLayoutAlign="start center">
   
           <div fxLayout="column" fxFlex="100">
@@ -28,17 +30,76 @@
           </div>
         </div>
   
-        <!-- reminder -->
+         <!-- reminder -->
+
+           <!-- reminder -->
+
+           <div fxLayout="row" fxLayout="row wrap">
+            <mat-chip-list class="chip">
+              <div *ngIf="
+                (todaydate | date: 'short') ==
+                  (array.remainder | date: 'shortDate') && array.remainder != ' '
+              ">
+                <mat-chip>Today {{ array.remainder | date: "shortTime" }}
+                  <mat-icon matChipRemove (click)="removeReminder(array,array.remainder)" (click)='openSnackBar()'>cancel</mat-icon>
+                </mat-chip>
+              </div>
+    
+              <div *ngIf="
+                (tomorrow | date: 'shortDate') ==
+                  (array.remainder | date: 'shortDate') && array.remainder != '  '
+              ">
+                <mat-chip>Tomorrow {{ array.remainder | date: "shortTime" }}
+                  <mat-icon matChipRemove (click)="removeReminder(array,array.remainder)" (click)='openSnackBar()'>cancel</mat-icon>
+                </mat-chip>
+              </div>
+    
+              <div *ngIf="
+                (tomorrow | date: 'shortDate') !=
+                  (array.remainder | date: 'shortDate') &&
+                (todaydate | date: 'shortDate') !=
+                  (array.remainder | date: 'shortDate') &&
+                array.remainder != ''
+              ">
+                <mat-chip>{{ array.remainder | date: "medium" }}
+                  <mat-icon matChipRemove (click)="removeReminder(array,array.remainder)" (click)='openSnackBar()'>cancel</mat-icon>
+                </mat-chip>
+              </div>
+            </mat-chip-list>
+          </div>
+
   
        
-  
+    <!-- Labels -->
+
+    <div *ngFor="let l of array.label">
+      <mat-chip-list selected>
+        <mat-chip class="btn">{{ l}}
+          <mat-icon matChipRemove (click)="deleteLabelFromNote(array, l)">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
   
         <!-- more menu icon button -->
-  
-       
-  
+<!--   
+        <div fxFlex="100" *ngIf="more == 'trash'" fxLayoutAlign="start center">
+          <button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="more">
+            <img id="img" src="../../../assets//images/outline-more_vert-24px.svg" />
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="deleteForever(array)" (click)='openSnackBar1()'>
+              Delete forever
+            </button>
+            <button mat-menu-item (click)="restore(array)" (click)='openSnackBar2()'>Restore</button>
+          </mat-menu>
+        </div> -->
+      
         <!-- TO IMPORT ICONS FROM ICONLIST -->
-  
+        <div fxFlex="50" *ngIf="more != 'trash'">
+          <app-iconlist class="icon" fxFlex="50" fxFlex.xs="90"  [card]="array" [more]="archived"
+            (archivedCard)="archive($event)" (unarchiveCard)="unarchived($event)" (deletecard)="archive(array)"
+            [type]="type"></app-iconlist>
+        </div>
       </mat-card>
     </div>
   </div>
@@ -49,7 +110,7 @@
       <div *ngIf="gridView==false" fxLayout="column wrap">
           <div cdkDropList [cdkDropListData]="cards" [cdkDropListConnectedTo]="secondList" #firstList="cdkDropList"
           (cdkDropListDropped)="drop($event,cards)" fxLayout="row wrap" fxLayoutAlign="start center" fxLayout.xs="column">
-          <div class="maindiv" cdkDrag *ngFor="let array of cards "> 
+          <div class="maindiv" cdkDrag *ngFor="let array of cards | search: Search">
             <mat-card [style.backgroundColor]="array.color" fxFlex.xs="100" fxLayout="column" class="matcard2" fxFlex="45"
               fxFlexOffset.xl="10">
               <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs="97" fxLayout="row" fxLayoutAlign="start center">

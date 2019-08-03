@@ -26,9 +26,9 @@ const noteSchema = new schema({
         type: String,
         required: true
     },
-    remainder: {
+    remainder:[ {
         type: String
-    },
+    }],
     color: {
         type: String
     },
@@ -46,7 +46,14 @@ const noteSchema = new schema({
     trash: {
         type: Boolean,
         default: false
-    }
+    } ,
+    label: [
+        {
+         
+          type: String,
+          ref: "labelSchema"
+        }
+      ]
 },
     {
         timestamps: true
@@ -95,6 +102,8 @@ class notemodel {
             trash:data.trash,
             pinned:data.pinned,
             archive:data.archive,
+            remainder:data.remainder,
+            label:data.labelid
         })
 
         var myPromise = new Promise(function (resolve, reject) {

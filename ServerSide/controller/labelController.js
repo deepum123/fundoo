@@ -85,7 +85,7 @@ module.exports.labelControllerGetLabels = (req, res) => {
             response.error = errors
             return res.status(422).send(response)
         } else {
-            labelService.labelServiceGetLabels(data, (err, data) => {
+            labelService.noteServiceGetLabels(data, (err, data) => {
                 if (err) {
                     logger.error(" label controller get label  ", err)
                     res.status(404).send({
@@ -93,7 +93,8 @@ module.exports.labelControllerGetLabels = (req, res) => {
                         message: "error occured in  get label function",
                     })
                 } else {
-                    logger.error(" get label res  data ", data)
+                    console.log("labelss",data)
+                    logger.info(" get label res  data ", data)
                     res.status(200).send({
                         success: true,
                         message: "successfully get all label ",
@@ -134,6 +135,7 @@ module.exports.labelControllerDeleteLabel = (req, res) => {
                         success: false,
                         message: "error occured in  delete label function",
                     })
+                }else{
                     res.status(200).send({
                         success: true,
                         message: "successfully  succesfully delete the label",

@@ -47,14 +47,26 @@
     </div>
 
     <div class="Border" fxLayout="column" class="takenote">
-      <textarea class="textArea" matTextareaAutosize placeholder="Take a note..."
-        [formControl]="noteContent"></textarea>
-    </div>
-    <div fxFlex="50" fxLayoutAlign="end center">
-      <button class="addnote" mat-button (click)="addNote()">
-        close
-      </button>
-    </div>
+        <textarea class="textArea" matTextareaAutosize placeholder="Take a note..."
+          [formControl]="noteContent"></textarea>
+      </div>
+ 
+   
+     
+      <!-- icon -->
+      <div fxFlex="10" fxLayoutAlign="start center">
+          <div fxFlex="50">
+            <app-iconlist [type]='type' [more]='more'  (emitReminderNote)='getReminder($event)'
+              (archivedNoteCard)='archive($event)'  (emitlabelid)='getlabel($event)' (color)="changeColor($event)"></app-iconlist>
+          </div>
+          
+          <div fxFlex="50" fxLayoutAlign="end center">
+            <button class="addnote" mat-button (click)="addNote()">
+              close
+            </button>
+          </div>
+        </div>
+       
 </mat-card>
 </div>
 

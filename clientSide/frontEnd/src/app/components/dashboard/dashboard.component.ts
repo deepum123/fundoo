@@ -3,7 +3,7 @@ import {
   Component,
   OnInit,
   Inject,
- 
+
 } from "@angular/core";
 import { MediaMatcher } from "@angular/cdk/layout";
 import { MatDialog, } from "@angular/material";
@@ -11,10 +11,11 @@ import { ChangeDetectorRef, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material";
 import { NoteServicesService } from '../../service/noteServices/note-services.service';
+import { LabeliditComponent } from '../../components/labelidit/labelidit.component';
 import { DOCUMENT } from '@angular/common';
 import { CurrentViewService } from '../../service/currentView/current-view.service'
 import { from } from 'rxjs';
-
+import { DataServicesService } from '../../service/dataServices/data-services.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -27,10 +28,11 @@ export class DashboardComponent implements OnInit {
   Search: string;
   labelList: any;
   email: any;
+  searchlistcard
   username: string;
   img: string;
   labelsList: any
-  gridView: boolean;item: any;
+  gridView: boolean; item: any;
   private _mobileQueryListener: () => void;
 
   constructor(
@@ -39,9 +41,10 @@ export class DashboardComponent implements OnInit {
     media: MediaMatcher,
     private router: Router,
     public dialog: MatDialog,
-    private view:CurrentViewService,
+    private view: CurrentViewService,
     private snackBar: MatSnackBar,
-
+    private noteService: NoteServicesService,
+    private data: DataServicesService
   ) {
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -51,7 +54,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-   // this.getLabels()
+    this.getLabels()
     this.islist = true;
     this.isClicked = false;
     this.img = localStorage.getItem('profilepic');
@@ -59,7 +62,7 @@ export class DashboardComponent implements OnInit {
   islist;
   isClicked;
   changeview() {
-    
+
     if (this.islist) {
       this.islist = false;
       console.log("list", this.islist);
@@ -76,12 +79,12 @@ export class DashboardComponent implements OnInit {
     this.view.viewChange()
 
   }
- 
+
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
- 
+
 
   refresh(): void {
     window.location.reload();
@@ -109,17 +112,22 @@ export class DashboardComponent implements OnInit {
   }
   startSearch() {
     this.router.navigate(['dashboard/search']);
+
   }
+
   editlabes() {
     this.router.navigate(['dashboard/labels'])
   }
- 
+  lookfor() {
+    // this.changeMessage(this.Search)
+    this.data.changeMessage(this.Search)
+  }
 
   sidenav() {
     console.log('i am run');
 
   }
- 
+
 
   openSnackBar() {
     this.snackBar.open('Signed out successfully', 'Ok', { duration: 2000 })
@@ -139,5 +147,40 @@ export class DashboardComponent implements OnInit {
   goToUrl4(): void {
     this.document.location.href = 'https://www.google.com/intl/en-GB/gmail/about';
   }
- 
+  openLabel() {
+    {
+      try {
+        const dialogRef = this.dialog.open(LabeliditComponent, {
+          width: '320px',
+          data: {}
+
+        })
+
+      } catch (error) {
+        console.log("error occured");
+      }
+    }
+  }
+
+  getLabels() {
+
+
+    this.noteService.getLableList().subscribe(data => {
+      console.log("labels in labels edit comp==>", data);
+
+      this.labelsList = data['data'];
+      this.labelsList = this.labelsList.reverse()
+      console.log("svg", this.labelsList);
+
+    }),
+      err => {
+        console.log(err);
+      };
+  }
+
+
+  sendLable(lable) {
+    this.data.sendLable(lable)
+  }
+
 }

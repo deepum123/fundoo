@@ -86,4 +86,24 @@ export class HttpService {
     };
     return this.http.put(environment.baseUrl + data.url, data.body, httpOptions);
   }
+  put(data) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'token': localStorage.getItem('token')
+      })
+    };
+    
+    return this.http.put(environment.baseUrl + data.url, data.body, httpOptions);
+  }
+   post(data) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'token': localStorage.getItem('token')
+      })
+    };
+
+    return this.http.post(environment.baseUrl + data.url, data.body,httpOptions);
+  }
 }
