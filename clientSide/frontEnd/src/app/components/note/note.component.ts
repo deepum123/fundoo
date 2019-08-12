@@ -75,7 +75,7 @@ export class NoteComponent implements OnInit {
         this.addingNote.emit(data["message"]);
         this.noteTitle.reset();
         this.noteContent.reset();
-      
+        window.location.reload();
       }),
         err => {
           console.log(err);

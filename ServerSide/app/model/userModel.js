@@ -29,7 +29,7 @@ const Schema = mongoose.Schema
 const userSchema = new Schema({
     firstname: {
         type: String,
-        required: true,
+        required: [true,"Fisrtname is required"],
         trim: true,
         validator: nameValidator
     },
@@ -50,10 +50,12 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-    }, isVerified: {
+    }, 
+    isVerified: {
         type: Boolean,
         default: false
-    }, uploadImage: {
+    }, 
+    uploadImage: {
         type: String
     }
 

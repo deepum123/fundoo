@@ -41,7 +41,7 @@ export class NoteServicesService {
 
   archiveNote(data) {
     const option = {
-      url: 'isPinned',
+      url: 'isArchive',
       body: data
     };
     return this.http.put( option)
@@ -105,7 +105,7 @@ export class NoteServicesService {
   } 
   saveLabelToNote(data) {
     const option = {
-      url: ' saveLabelToNote',
+      url: 'saveLabelToNote',
       body: data
     };
     return this.http.post( option )
@@ -119,14 +119,28 @@ export class NoteServicesService {
   }
   deleteForever(data) {
     const option = {
-      url: ' deleteNote',
+      url: 'deleteNote',
       body: data
     };
-    return this.http.post( option )
+    return this.http.put( option )
   }
   search(data) {
     const option = {
       url: 'search',
+      body: data
+    };
+    return this.http.post( option )
+  }
+  profilePic(requestBody) {
+    const option = {
+      url: 'uploadImage',
+      body: requestBody
+    };
+    return this.http.post(option);
+  }
+  noteimage(data) {
+    const option = {
+      url: 'updateImagee',
       body: data
     };
     return this.http.post( option )

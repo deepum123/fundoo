@@ -68,7 +68,7 @@ class noteServices {
     *@param       : req (request from client)
     *@param       : callback (response from server)
     ****************************************************************************/
-    noteServiceIsArchive(data, callback) {
+   noteServiceIsArchive(data, callback) {
         var field = {
             archive: data.archive,
             trash: false,
@@ -185,7 +185,8 @@ class noteServices {
     ****************************************************************************/
     noteServiceNoteRemainder(data, callback) {
         var field = {
-            remainder: data.remainder
+            $addToSet:{ remainder: data.remainder}
+           
         }
         noteModel.Update(data, field, (err, data) => {
             if (err) {
@@ -270,7 +271,7 @@ class noteServices {
 
     noteServiceAddNoteToLabel(data, callback) {
         var field = {
-            $addToSet:{label: data.label}
+            $addToSet:{label: data.labelid}
         }
         console.log("33333333333",field)
         noteModel.Update(data, field, (err, data) => {

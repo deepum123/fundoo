@@ -1,10 +1,11 @@
 
 const auth=require('../middleware/authentication')
 const noteController=require('../controller/noteController')
-const upload=require('../services/vendors/s3ApiServices')
+const s3service=require('../services/vendors/s3ApiServices')
 const express=require('express')
 const router=express.Router()
-
+let multer  = require('multer'); 
+let upload  = multer({ storage: multer.memoryStorage() });
 //router.post('/createNote',auth.auth,noteController.noteControllerCreateNote)
 router.route('/createNote').post(auth.auth, noteController.noteControllerCreateNote);
 //router.post('/deleteNote',auth.auth,noteController.noteControllerDeleteNote)
@@ -15,7 +16,8 @@ router.route('/getAllNotes').get(auth.auth, noteController.noteControllerGetNote
 router.route('/isArchive').put(auth.auth,noteController.noteControllerIsArchive);
 //router.post('/isPinned',auth.auth,noteController.noteControllerIsPinned)
 router.route('/isPinned').put(auth.auth,noteController.noteControllerIsPinned);
-router.post('/isTrashed',auth.auth,noteController.noteControllerIsTrashed)
+//router.post('/isTrashed',auth.auth,noteController.noteControllerIsTrashed)
+router.route('/isTrashed').put(auth.auth,noteController.noteControllerIsTrashed);
 router.route('/saveLabelToNote').post(auth.auth,noteController.labelControllerAddNoteTolabel);
 router.route('/RemoveLabelFromNote').post(auth.auth,noteController.labelControllerRemoveNoteTolabel);
 
@@ -30,6 +32,6 @@ router.post('/search',auth.auth,noteController.noteControllerSearch)
 router.route('/remainder').put(auth.auth,noteController.noteControllerNoteRemainder);
 router.route('/Removeremainder').put(auth.auth,noteController.noteControllerRemoveRemainder);
 router.post('/erashTrash',auth.auth,noteController.noteControllerErashTrash)
-//router.post('/updateImagee',auth.auth,upload.single('image'),noteController.noteControllerUpdateImage)
+router.post('/updateImagee',auth.auth,upload.single('image'),s3service.upload,noteController.noteControllerUpdateImage)
 
 module.exports=router

@@ -1,1 +1,3 @@
-<p>reminders works!</p>
+<app-note (addingNote)="recievemessage($event)"></app-note>
+
+<app-displaynote [cards]="cards" fxLayout="{{layout}}" fxLayout="row wrap"></app-displaynote>

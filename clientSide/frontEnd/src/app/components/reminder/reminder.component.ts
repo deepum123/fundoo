@@ -64,25 +64,26 @@ export class ReminderComponent implements OnInit {
  
     this.reminderr=this.checker
     
-    this.saveReminder();
   }
 
   saveReminder() {
    
-
+    console.log("gsgsgsdfgsfgsfgmmmmmmmmmmmm","saveReminder")
 
       // console.log(this.model.reminder, "model");
       if (this.card == undefined) {
            this.emitReminderNote.emit(this.reminderr)
+           console.log("gsgsgsdfgsfgsfgmmmmmmmmmmmm",this.emitReminderNote)
       } else {
-        console.log("api call", this.model);
+        console.log("api calllllllllllllllllllllllllllllll", this.model);
         this.model={
          noteid:this. card._id,
          remainder:this.reminderr
         }
         this.notes.addRemainder(this.model).subscribe(response => {
           console.log(response, "response");
-        //  this.card.reminder = this.model.reminder;
+          this.card["remainder"].push(this.reminderr);
+    
         });
       }
     }

@@ -44,7 +44,7 @@ export class SearchComponent implements OnInit {
     try {
       this.userService. 
       getnotee() 
-        .pipe(takeUntil(this.destroy$))
+        //.pipe(takeUntil(this.destroy$))
         .subscribe(
           data => {
             console.log("data in search ===>", data);

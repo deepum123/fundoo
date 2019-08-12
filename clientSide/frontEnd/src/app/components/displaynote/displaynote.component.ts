@@ -1,17 +1,16 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from "@angular/core";
-import { getLocaleFirstDayOfWeek } from "@angular/common";
+
 import { HttpService } from "../../service/http/http.service";
 import { MatCardSmImage } from "@angular/material";
 //import { forEach } from "@angular/router";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { UpdatenoteComponent } from "../updatenote/updatenote.component";
 import { NoteServicesService } from "../../service/noteServices/note-services.service";
-import { Message } from "@angular/compiler/src/i18n/i18n_ast";
-import { MockResourceLoader } from "@angular/compiler/testing";
+
 import { MatSnackBar } from "@angular/material";
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CurrentViewService } from '../../service/currentView/current-view.service';
-import {UserService} from "../../service/user/user.service";
+import { UserService } from "../../service/user/user.service";
 export interface DialogData {
   labelsList: any;
   array: [];
@@ -43,6 +42,7 @@ export class DisplaynoteComponent implements OnInit {
   @Input() cards;
   @Input() Search;
   @Input() more: string;
+
   // @Input() type;
   @Input() archived;
   @Input() card: [];
@@ -58,9 +58,9 @@ export class DisplaynoteComponent implements OnInit {
   pin;
   @Input() cond;
   pinnedValue;
-  item:any[];
-  notemessage:any;
-type="notee"
+  item: any[];
+  notemessage: any;
+  type = "notee"
   model;
   flag1 = true;
   todaydate = new Date();
@@ -73,7 +73,7 @@ type="notee"
     0,
     0
   );
- 
+  gridView: boolean;
   array: any[];
   // displaymode:boolean=true
 
@@ -81,9 +81,9 @@ type="notee"
     public http: HttpService,
     public userService: UserService,
     public dialog: MatDialog,
-    public noteService: NoteServicesService ,
+    public noteService: NoteServicesService,
     private snackBar: MatSnackBar,
-    private view : CurrentViewService
+    private view: CurrentViewService
   ) {
     console.log('constructor run');
 
@@ -97,13 +97,14 @@ type="notee"
   ngOnInit() {
     console.log("jshdgfhjsgdfjhgs");
     this.view.currentView.subscribe(
-      response=>this.gridView=response
+      response => this.gridView = response
     )
 
+    console.log("hhhhhhhhhhhhhhh", this.more)
   }
 
 
- 
+
   openDialog(array) {
     var archie = array.archive;
     var delete1 = array.trash;
@@ -117,8 +118,8 @@ type="notee"
     });
 
     dialogRef.afterClosed().subscribe(result => {
-       console.log(result["array"], "from dialog box");
-       console.log("===========================", result["array"].trash);
+      console.log(result["array"], "from dialog box");
+      console.log("===========================", result["array"].trash);
 
       if (
         archie != result["array"].archive ||
@@ -140,28 +141,28 @@ type="notee"
         description: result["array"].description
       };
       console.log(this.model, "modelll of update");
-     this.userService.updateNoteTittle(this.model).subscribe(message => {
-         console.log(message);
-       });
+      this.userService.updateNoteTittle(this.model).subscribe(message => {
+        console.log(message);
+      });
 
-     this.userService.updateNoteDescription(this.model).subscribe(Message => {
-         console.log(Message);
-       });
+      this.userService.updateNoteDescription(this.model).subscribe(Message => {
+        console.log(Message);
+      });
     });
   }
-  restore(card, more) {
+  restore(card) {
     try {
+      console.log(card._id, "nnnnnnnnnnnnnnnnn");
       this.noteService
-        . trashNote({
+        .trashNote({
           trash: false,
-          noteId: [card._id]
+          noteid: card._id
         })
         .subscribe(
           data => {
             console.log(data, "response when delete");
             let ind = this.cards.indexOf(card);
             this.cards.splice(ind, 1);
-            // this.cardRestore(card)
           },
           err => console.log(err)
         );
@@ -170,45 +171,43 @@ type="notee"
     }
   }
   deleteForever(array) {
-    console.log("hahaha")
-    this.noteService
-      .deleteForever({
-        deleteNote: false,
-        noteId: [array._id]
-      })
-      .subscribe(
-        data => {
-          console.log(data, "response when delete");
-          let ind = this.cards.indexOf(array);
-          this.cards.splice(ind, 1);
-          // this.cardRestore(card)
-        },
-        err => console.log(err)
-      );
+    let ind = this.cards.indexOf(array);
+    this.cards.splice(ind, 1);
+
   }
-  
+  archive($event) {
+    console.log("dddddddddddddddd", $event)
+
+    let ind = this.cards.indexOf($event);
+    this.cards.splice(ind, 1);
+
+  }
+
+  unarchived($event) {
+    let ind = this.cards.indexOf($event);
+    this.cards.splice(ind, 1);
+
+  }
 
 
-  removeReminder(array,remainder) {
-    console.log(array._id,remainder, "bgcdvzjhzzzzzzzzzzzzzzzzzzz");
 
-    var model = { noteid: array._id, remainder:remainder};
+  removeReminder(array, remainder) {
+    console.log(array._id, remainder, "bgcdvzjhzzzzzzzzzzzzzzzzzzz");
+
+    var model = { noteid: array._id, remainder: remainder };
     console.log(model, "model");
 
     this.noteService.removeRemainder(model).subscribe(data => {
-      window.location.reload();
-      // let ind = this.cards.indexOf(array);
-      // array.reminder.splice(ind, 1)
+      let ind = array['remainder'].indexOf(remainder);
+      array['remainder'].splice(ind, 1);
+
     });
   }
-
-
 
 
   notePin() {
     this.flag1 = !this.flag1;
   }
-
 
   openSnackBar() {
     this.snackBar.open("Reminder deleted", "Ok", { duration: 2000 });
@@ -230,24 +229,19 @@ type="notee"
    *************************************************************/
 
   deleteLabelFromNote(card, l) {
-    // if(card != undefined){
-
     console.log(card._id, "   hkjihjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj      ", l);
 
     this.noteService
       .removeLabel({
         noteid: card._id,
         label: l,
-     
+
       })
       .subscribe(
         data => {
           console.log("data in", data);
-          // let ind = card['label'].indexOf(l);
-          // card['label'].splice(ind, 1);
-          // //   let ind = l.indexOf(l)
-          // //  l.splice(ind, 1);
-           window.location.reload();
+          let ind = card['label'].indexOf(l);
+          card['label'].splice(ind, 1);
         },
         err => {
           console.log(err);
@@ -256,19 +250,11 @@ type="notee"
   }
 
 
+  drop(event: CdkDragDrop<any[]>, item) {
+    console.log("nmbxcnmvb", item);
 
-
-  drop(event: CdkDragDrop<any[]>,item) {
-    console.log("nmbxcnmvb",item);
-    
     moveItemInArray(this.cards, event.previousIndex, event.currentIndex);
-    // this.http.sequence(item).subscribe(
-    //       data => {
-    //         console.log(data);
-    //                 // this.cardRestore(card)
-    //       },
-    //       err => console.log(err)
-    //     );
+
   }
-  gridView:boolean;
+
 }

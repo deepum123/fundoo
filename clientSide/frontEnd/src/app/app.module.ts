@@ -5,6 +5,7 @@ import { AsyncPipe } from '../../node_modules/@angular/common';
 import {MatFormFieldModule} from '@angular/material/form-field'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ImageCropperModule } from "ngx-image-cropper";
 import {  MatButtonModule, MatSelectModule, MatIconModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './components/register/register.component';
@@ -47,8 +48,7 @@ import {MatDatepickerModule,MatNativeDateModule} from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { CardnoteComponent } from './components/cardnote/cardnote.component';
-import { EditCardComponrntComponent } from './components/edit-card-componrnt/edit-card-componrnt.component';
-import { EditCardComponentComponent } from './components/edit-card-component/edit-card-component.component';
+
 
 import { LabelPipe } from './service/pipe/labelpipe/label.pipe';
 import { SearchPipe } from './service/pipe/searchpipe/search.pipe';
@@ -76,8 +76,7 @@ import { LabelComponent } from './components/label/label.component';
     ImagecorpComponent,
 
     CardnoteComponent,
-    EditCardComponrntComponent,
-    EditCardComponentComponent,
+   
     
     LabelPipe,
     SearchPipe,
@@ -87,7 +86,7 @@ import { LabelComponent } from './components/label/label.component';
   ],
   imports: [
     MatNativeDateModule,
- 
+    ImageCropperModule,
     MatDatepickerModule,
     DragDropModule,
     MatIconModule,

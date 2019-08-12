@@ -527,7 +527,8 @@ module.exports.noteControllerUpdateImage = (req, res) => {
         console.log("\npic location --------<", req.file.location);
         var data = {
             address: req.file.location,
-            userId: req.id
+            userId: req.id,
+            noteid:req.body.noteid
         }
         noteService.noteServicesUpdateImage(data, (err, data) => {
             if (err) {

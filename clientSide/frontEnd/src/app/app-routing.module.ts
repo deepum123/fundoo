@@ -13,6 +13,10 @@ import { DisplaynoteComponent } from './components/displaynote/displaynote.compo
 import { UpdatenoteComponent } from './components/updatenote/updatenote.component';
 import { LabeliditComponent } from './components/labelidit/labelidit.component';
 import { SearchComponent } from './components/search/search.component';
+import { ImagecorpComponent } from './components/imagecorp/imagecorp.component';
+import { ArchiveComponent } from './components/archive/archive.component';
+import { RemindersComponent } from './components/reminders/reminders.component';
+import { TrashComponent } from './components/trash/trash.component';
 const routes: Routes = [
   {
     path: '',
@@ -70,10 +74,6 @@ const routes: Routes = [
         pathMatch : 'full'
       },
       {
-        path:'note',
-        component:NoteComponent
-      },
-      {
             path : 'cardnotes',
             component:CardnoteComponent
           },
@@ -81,8 +81,25 @@ const routes: Routes = [
             path: 'search',
             component: SearchComponent
           },
+          {
+            path: 'archive',
+            component:   ArchiveComponent 
+          },
+          {
+            path: 'trash',
+            component:  TrashComponent 
+          },
+          {
+            path: 'reminders',
+            component:   RemindersComponent 
+          },
+        
     ]
-  }
+  },
+  {
+    path: 'imagecropper',
+    component: ImagecorpComponent
+  },
     
 ];
   

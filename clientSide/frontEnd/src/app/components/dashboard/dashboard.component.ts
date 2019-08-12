@@ -16,7 +16,7 @@ import { DOCUMENT } from '@angular/common';
 import { CurrentViewService } from '../../service/currentView/current-view.service'
 import { from } from 'rxjs';
 import { DataServicesService } from '../../service/dataServices/data-services.service'
-
+import {ImagecorpComponent } from '../imagecorp/imagecorp.component'
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -24,7 +24,7 @@ import { DataServicesService } from '../../service/dataServices/data-services.se
 })
 export class DashboardComponent implements OnInit {
   mobileQuery: MediaQueryList;
-  message: string = "Keep";
+  message: string = "Fundoo";
   Search: string;
   labelList: any;
   email: any;
@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
     this.email = localStorage.getItem('email');
-    this.username = localStorage.getItem('name');
+    this.username = localStorage.getItem('fisrtname');
   }
 
   ngOnInit() {
@@ -183,4 +183,27 @@ export class DashboardComponent implements OnInit {
     this.data.sendLable(lable)
   }
 
+
+  fileUpload($event) {
+    console.log("jhgdhs==>", $event);
+
+    this.setProfilePic($event)
+  }
+  setProfilePic($event) {
+    const dialogRef = this.dialog.open(ImagecorpComponent, {
+      width: '250px',
+      data: $event
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == undefined) {
+        return;
+       }this.img = result;
+      // this.card["image"].push(this.img);
+      console.log("aaaaaaaaaaaaaaaaaaaaa",result)
+      localStorage.setItem('image', result)
+     // window.location.reload();
+      
+    })
+  }
 }

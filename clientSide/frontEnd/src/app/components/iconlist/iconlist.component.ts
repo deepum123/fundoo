@@ -87,7 +87,6 @@ export class IconlistComponent implements OnInit {
   updateColor(color, card) {
     console.log(card, "card..");
     console.log((card.color = color), "color..");
-   
     this.notes
       .updateColor({
         color: color,
@@ -103,7 +102,8 @@ export class IconlistComponent implements OnInit {
       );
   }
 
-  // to move notes from note to archive
+
+
   doArchive(card) {
     if (card == undefined) {
       this.archivedNoteCard.emit(true);
@@ -113,10 +113,11 @@ export class IconlistComponent implements OnInit {
       this.notes
         .archiveNote({
           archive: true,
-          noteid: [card._id]
+          noteid: card._id
         })
         .subscribe(data => {
           console.log(data, "dataaaaaaaaaaaaaaaaaaaaa");
+          console.log(card, "yyyyyyyyyyyyyy");
           this.cardArchive(card);
         }),
         err => console.log(err);
@@ -129,10 +130,11 @@ export class IconlistComponent implements OnInit {
   }
 
   doUnArchive(card) {
+    console.log("aaaaaaaaaaaaaaaaaa", card)
     this.notes
       .archiveNote({
         archive: false,
-        noteid: [card._id]
+        noteid: card._id
       })
       .subscribe(data => {
         this.notArchive(card);
@@ -147,14 +149,14 @@ export class IconlistComponent implements OnInit {
   deleteNote(card) {
     console.log("delete note", card._id)
     this.notes
-      . trashNote({
+      .trashNote({
         trash: true,
-        noteid: [card._id]
+        noteid: card._id
       })
       .subscribe(
         data => {
           console.log(data, "response ==> delete is clicked");
-          this.cardDelete(card);
+          this.cardDelete(card)
         },
         err => console.log(err)
       );
@@ -234,17 +236,18 @@ export class IconlistComponent implements OnInit {
     //Another instructions
   }
 
-  saveLabeltoNote(card,label) {
+  saveLabeltoNote(card, label) {
 
-    console.log("jguyagdfuagsfuiyagsffffffffffffffffffffff",label.label)
+    console.log("jguyagdfuagsfuiyagsffffffffffffffffffffff", label.label)
     if (card == undefined) {
       this.emitlabelid.emit(label.label);
     } else {
+      console.log("lllllllllllllllllllllll", card._id, label.label);
       this.notes
         .saveLabelToNote({
           noteid: card._id,
-          labelid: label.label_id,
-    
+          labelid: label.label,
+
         })
         .subscribe(data => {
           card["label"].push(label.label);
@@ -253,42 +256,36 @@ export class IconlistComponent implements OnInit {
           console.log("data in save labels", data);
         });
     }
-  // } else {
-  //  this.emitLabelToNote.emit(label);
-  //}
-   }
+
+  }
 
 
   fileChangeEvent(event: any) {
     // this.imageChangedEvent = event;
     const image = event.target.files[0];
-    const noteID = this.card._id
-    console.log("this is note or cardid", noteID)
+    const noteid = this.card._id
+    console.log("this is note or cardid", noteid)
     // console.log("file ",file);
     // console.log("file... ",this.fileToUpload);
     const data = {
       'image': image,
-      'noteID': this.card._id
+      'noteid': this.card._id
     }
     console.log("created image object", data);
-    // this.http.noteimage(image, noteID).subscribe(data => {
-    //   console.log(data);
-    // },
-    //   error => {
-    //     console.log("error message");
+   this.notes.noteimage(data).subscribe(data => {
+      console.log(data);
+    },
+      error => {
+        console.log("error message");
 
-    //     console.log(error);
-    //   });
+        console.log(error);
+      });
   }
 
 
   getReminderr($event) {
-    // if (this.reminder[0] != undefined) {
-    //   this.reminder = [];
-    //   this.reminder.push($event);
-    // } else {
-      var reminder=$event
-      this.emitReminderNote.emit(reminder)
-    }
+    var reminder = $event
+    this.emitReminderNote.emit(reminder)
+  }
 
 }

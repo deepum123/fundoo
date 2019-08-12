@@ -1,4 +1,4 @@
-<html>
+
 
 <div fxLayoutAlign="space-between end" fxLayout="row" fxFlex="60">
     <button id="Remaind" matTooltip="Remind me" mat-icon-button [matMenuTriggerFor]="remindme">
@@ -47,9 +47,6 @@
           (change)="fileChangeEvent($event)">
       </mat-menu>
 
-
-
-
     <!-- archive button -->
     <div>
         <button id="arc" *ngIf="more !='archive'" mat-icon-button matTooltip="Archive">
@@ -70,14 +67,12 @@
         <img id="img" src="../../../assets/images/outline-more_vert-24px.svg" />
       </button>
       <mat-menu #menu="matMenu">
-        <div *ngIf="type=='note'">
-          <button mat-menu-item [matMenuTriggerFor]='labelmenu' (click)="$event.stopPropagation()">add label</button>
-          <button mat-menu-item>show tick boxes</button>
-       
     
+          <button mat-menu-item [matMenuTriggerFor]='labelmenu' (click)="$event.stopPropagation()">add label</button>
+
         <div *ngIf="type!='note'">
           <button mat-menu-item (click)="deleteNote(card)" >Delete Note</button>
-          <button mat-menu-item [matMenuTriggerFor]='labelmenu' (click)="$event.stopPropagation()">add label</button>
+          <!-- <button mat-menu-item [matMenuTriggerFor]='labelmenu' (click)="$event.stopPropagation()">add label</button> -->
           <!-- <div *ngIf='flag4==true'>
             <button mat-menu-item (click)='checklist(card)' (click)='HideTick()'>show tick boxes</button>
           </div>
@@ -85,7 +80,7 @@
             <button mat-menu-item (click)='checklist(card)'>Hide tick boxes</button>
           </div> -->
           <!-- <button mat-menu-item>copy to google docs</button> -->
-        </div>
+  
          </div>
       </mat-menu>
       
@@ -93,7 +88,8 @@
 
   <mat-menu #labelmenu=matMenu>
     <div fxLayout='column' (click)="$event.stopPropagation()">
-      <div>Label note</div>
+      <div>Label note</div>      
+     
       <div fxLayout="row">
         <div>
           <input (click)="doSomething($event)" matInput [(ngModel)]="label" placeholder="Enter label name"
@@ -105,7 +101,7 @@
       </div>
 
 
-      <div *ngFor="let array of labelsList ">
+      <div *ngFor="let array of labelsList  | label:label">
 
         <div *ngIf="flag1 == true">
           <div fxLayout="row">
@@ -130,4 +126,4 @@
 
 
       </div>
-      </html>
+    
