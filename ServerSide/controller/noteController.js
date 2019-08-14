@@ -636,7 +636,7 @@ module.exports.labelControllerAddNoteTolabel = (req, res) => {
 
 module.exports.labelControllerRemoveNoteTolabel = (req, res) => {
     try {
-        logger.info(" add note to label req body   data ", req.body)
+        logger.info(" remove note to label req body   data ", req.body)
         console.log("sssssssssssss", req.body)
         var data = {
             userId: req.id,
@@ -655,17 +655,17 @@ module.exports.labelControllerRemoveNoteTolabel = (req, res) => {
         noteService.noteServiceRemoveNoteToLabel(data, (err, data) => {
 
                 if (err) {
-                    logger.error("  Add Note To Label  error ", err)
+                    logger.error("  remove Note To Label  error ", err)
                     res.status(404).send({
                         success: false,
-                        message: "error in  Add Note To Label function",
+                        message: "error in  remove Note To Label function",
                         data: err
                     })
                 } else {
-                    logger.info("  Add Note To Label  res  data ", data)
+                    logger.info("  remove Note To Label  res  data ", data)
                     res.status(200).send({
                         success: true,
-                        message: "successfully  Add Note To Label function is  done",
+                        message: "successfully  remove Note To Label function is  done",
                         data: data
                     })
                 }

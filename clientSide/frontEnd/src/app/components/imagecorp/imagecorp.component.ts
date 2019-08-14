@@ -45,9 +45,7 @@ export class ImagecorpComponent implements OnInit {
       console.log("------------------------------", data.data.uploadImage);
        localStorage.setItem("profilepic",  data.data.uploadImage);
        this.dialogRef.close( data.data.uploadImage);
-      // this.response = data;
-      // localStorage.setItem("image", this.response.userimage);
-      // this.card["image"].push(this.img);
+     
     });
   }
 

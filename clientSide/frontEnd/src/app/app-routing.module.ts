@@ -26,10 +26,7 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
-  {
-    path: 'u',
-    component: UpdatenoteComponent
-  },
+ 
   {
     path: 'register',
     component: RegisterComponent
@@ -56,14 +53,14 @@ const routes: Routes = [
     component: DashboardComponent
   },
   
-  {
-    path : 'cardnotes',
-    component:CardnoteComponent
-  },
-  {
-    path : 'labeledit',
-    component:LabeliditComponent
-  },
+  // {
+  //   path : 'cardnotes',
+  //   component:CardnoteComponent
+  // },
+  // {
+  //   path : 'labeledit',
+  //   component:LabeliditComponent
+  // },
   {
     path:'dashboard',
     component:DashboardComponent,canActivate:[AuthguardService],

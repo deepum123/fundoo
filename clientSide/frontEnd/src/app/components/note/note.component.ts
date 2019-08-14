@@ -75,7 +75,7 @@ export class NoteComponent implements OnInit {
         this.addingNote.emit(data["message"]);
         this.noteTitle.reset();
         this.noteContent.reset();
-        window.location.reload();
+       // window.location.reload();
       }),
         err => {
           console.log(err);
@@ -114,10 +114,6 @@ export class NoteComponent implements OnInit {
     this.addNote();
   }
   getReminder($event) {
-    // if (this.reminder[0] != undefined) {
-    //   this.reminder = [];
-    //   this.reminder.push($event);
-    // } else {
       this.reminder.push($event)
     }
     getlabel($event){

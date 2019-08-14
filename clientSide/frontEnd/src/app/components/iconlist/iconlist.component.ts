@@ -2,8 +2,8 @@ import { Component, OnInit, Output, Input } from "@angular/core";
 import { NoteServicesService } from "../../service/noteServices/note-services.service";
 import { EventEmitter } from "@angular/core";
 import { MatSnackBar, MatDialog } from "@angular/material";
-import { LabeliditComponent } from "../../components/labelidit/labelidit.component";
-import { from } from "rxjs";
+//import { LabeliditComponent } from "../../components/labelidit/labelidit.component";
+//import { from } from "rxjs";
 import { HttpService } from 'src/app/service/http/http.service';
 //import { CollaboratorsComponent } from "../collaborators/collaborators.component";
 
@@ -66,7 +66,7 @@ export class IconlistComponent implements OnInit {
     private notes: NoteServicesService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private http: HttpService
+   // private http: HttpService
   ) { }
 
   ngOnInit() {
@@ -197,7 +197,7 @@ export class IconlistComponent implements OnInit {
 
   getLabels() {
     try {
-      var userid = localStorage.getItem("userid");
+    //  var userid = localStorage.getItem("userid");
       this.notes.getLableList().subscribe(data => {
         console.log("labels in labels edit comp==>", data);
 

@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
     this.getLabels()
     this.islist = true;
     this.isClicked = false;
-    this.img = localStorage.getItem('profilepic');
+    this.img = localStorage.getItem('image');
   }
   islist;
   isClicked;
@@ -90,7 +90,7 @@ export class DashboardComponent implements OnInit {
     window.location.reload();
   }
   note() {
-    this.message = "Keep"
+    this.message = "Fundoo"
     this.router.navigate(['dashboard/cardnotes']);
   }
   reminders() {

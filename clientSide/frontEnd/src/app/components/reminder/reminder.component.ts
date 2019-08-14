@@ -30,18 +30,18 @@ export class ReminderComponent implements OnInit {
     { value: "option4", timeZone: "Night", time: "8:00 PM", timeCount: 20 }
   ];
 
-  constructor(private notes: NoteServicesService) {}
+  constructor(private notes: NoteServicesService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   toggle() {
     this.reminderShow = !this.reminderShow;
   }
   reminder(dayCount, timeCount) {
     console.log(dayCount, timeCount, "==>daycount,timeCount");
     this.changed = true;
-   
-    this.reminderr= 
-    new Date(
+
+    this.reminderr =
+      new Date(
         this.currentDate.getFullYear(),
         this.currentDate.getMonth(),
         this.currentDate.getDate() + dayCount,
@@ -50,10 +50,10 @@ export class ReminderComponent implements OnInit {
         0,
         0
       )
-    
-  
-      this.saveReminder();
-    
+
+
+    this.saveReminder();
+
   }
 
   customreminder(timeCount) {
@@ -61,30 +61,30 @@ export class ReminderComponent implements OnInit {
 
     this.changed = true;
     this.checker.setHours(timeCount, 0, 0);
- 
-    this.reminderr=this.checker
-    
+
+    this.reminderr = this.checker
+
   }
 
   saveReminder() {
-   
-    console.log("gsgsgsdfgsfgsfgmmmmmmmmmmmm","saveReminder")
 
-      // console.log(this.model.reminder, "model");
-      if (this.card == undefined) {
-           this.emitReminderNote.emit(this.reminderr)
-           console.log("gsgsgsdfgsfgsfgmmmmmmmmmmmm",this.emitReminderNote)
-      } else {
-        console.log("api calllllllllllllllllllllllllllllll", this.model);
-        this.model={
-         noteid:this. card._id,
-         remainder:this.reminderr
-        }
-        this.notes.addRemainder(this.model).subscribe(response => {
-          console.log(response, "response");
-          this.card["remainder"].push(this.reminderr);
-    
-        });
+    console.log("gsgsgsdfgsfgsfgmmmmmmmmmmmm", "saveReminder")
+
+    // console.log(this.model.reminder, "model");
+    if (this.card == undefined) {
+      this.emitReminderNote.emit(this.reminderr)
+      console.log("gsgsgsdfgsfgsfgmmmmmmmmmmmm", this.emitReminderNote)
+    } else {
+      console.log("api calllllllllllllllllllllllllllllll", this.model);
+      this.model = {
+        noteid: this.card._id,
+        remainder: this.reminderr
       }
+      this.notes.addRemainder(this.model).subscribe(response => {
+        console.log(response, "response");
+        this.card["remainder"].push(this.reminderr);
+
+      });
     }
   }
+}
